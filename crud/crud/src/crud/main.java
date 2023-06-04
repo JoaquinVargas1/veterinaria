@@ -58,7 +58,7 @@ public class main extends javax.swing.JFrame {
 
         mascotas.setBackground(new java.awt.Color(255, 255, 255));
         mascotas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        mascotas.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\perro.png")); // NOI18N
+        mascotas.setIcon(new javax.swing.ImageIcon("perro.png")); // NOI18N
         mascotas.setText("Mascotas");
         mascotas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mascotas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -71,7 +71,7 @@ public class main extends javax.swing.JFrame {
 
         medicina.setBackground(new java.awt.Color(255, 255, 255));
         medicina.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        medicina.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\medicina.png")); // NOI18N
+        medicina.setIcon(new javax.swing.ImageIcon("medicina.png")); // NOI18N
         medicina.setActionCommand("Medicamentos");
         medicina.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         medicina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -85,7 +85,7 @@ public class main extends javax.swing.JFrame {
 
         veterinario.setBackground(new java.awt.Color(255, 255, 255));
         veterinario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        veterinario.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\veterinario.png")); // NOI18N
+        veterinario.setIcon(new javax.swing.ImageIcon("veterinario.png")); // NOI18N
         veterinario.setText("Veterinarios");
         veterinario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         veterinario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -98,7 +98,7 @@ public class main extends javax.swing.JFrame {
 
         tipo.setBackground(new java.awt.Color(255, 255, 255));
         tipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tipo.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\donacion-de-sangre.png")); // NOI18N
+        tipo.setIcon(new javax.swing.ImageIcon("donacion-de-sangre.png")); // NOI18N
         tipo.setText("Tipos de medicamento");
         tipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tipo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -111,7 +111,7 @@ public class main extends javax.swing.JFrame {
 
         dueños.setBackground(new java.awt.Color(255, 255, 255));
         dueños.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        dueños.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\adoption.png")); // NOI18N
+        dueños.setIcon(new javax.swing.ImageIcon("adoption.png")); // NOI18N
         dueños.setText("Dueños");
         dueños.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dueños.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -143,7 +143,7 @@ public class main extends javax.swing.JFrame {
         jLabel2.setText("VETERINARIA MASCOTAS DEL EDUARD");
 
         buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        buscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\buscar.png")); // NOI18N
+        buscar.setIcon(new javax.swing.ImageIcon("buscar.png")); // NOI18N
         buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
