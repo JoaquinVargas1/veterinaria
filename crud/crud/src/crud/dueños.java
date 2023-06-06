@@ -29,7 +29,7 @@ public class dueños extends javax.swing.JFrame {
     }
 
     public void actualizarDatos() {
-    	JFrame f= new JFrame();
+    		JFrame f= new JFrame();
     	f.setLayout(null);
     	f.setSize(500,600);
     	f.setLocation(0,0);
@@ -39,9 +39,9 @@ public class dueños extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
-    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
-    	actualizarDatos.setSize(300,30);
-    	actualizarDatos.setLocation(120,5);
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos Dueño");
+    	actualizarDatos.setSize(500,30);
+    	actualizarDatos.setLocation(80,5);
     	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
 
     	ss.add(actualizarDatos);
@@ -91,15 +91,15 @@ public class dueños extends javax.swing.JFrame {
     	
     	
     	
-    	JLabel idDueno = new JLabel("ID: ");
-    	idDueno.setSize(150,30);
-    	idDueno.setLocation(50,170);
+    	JLabel idDueno = new JLabel("ID del dueño a modificar:  ");
+    	idDueno.setSize(250,30);
+    	idDueno.setLocation(10,170);
     	ss.add(idDueno);
     	
     	
     	JTextField idDuenoBuscar = new JTextField();
     	idDuenoBuscar.setSize(150,30);
-    	idDuenoBuscar.setLocation(120,170);
+    	idDuenoBuscar.setLocation(170,170);
     	ss.add(idDuenoBuscar);
     	
     	
