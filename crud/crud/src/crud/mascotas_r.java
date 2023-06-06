@@ -39,9 +39,9 @@ public class mascotas_r extends javax.swing.JFrame {
     	ss.setLayout(null);
     	
     	
-    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
-    	actualizarDatos.setSize(300,30);
-    	actualizarDatos.setLocation(120,5);
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos Mascota");
+    	actualizarDatos.setSize(700,30);
+    	actualizarDatos.setLocation(20,5);
     	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
     	ss.add(actualizarDatos);
 
@@ -57,55 +57,46 @@ public class mascotas_r extends javax.swing.JFrame {
     	newNombreMascota.setLocation(120,50);
     	ss.add(newNombreMascota);
     	
-    	JLabel nombreDueno = new JLabel("ID de dueño: ");
-    	nombreDueno.setSize(150,30);
-    	nombreDueno.setLocation(10,80);
-    	ss.add(nombreDueno);
     	
-    	
-    	JTextField newNombreDueno = new JTextField();
-    	newNombreDueno.setSize(150,30);
-    	newNombreDueno.setLocation(120,80);
-    	ss.add(newNombreDueno);
     	
     	JLabel nombreMedicina = new JLabel("ID de Medicina: ");
     	nombreMedicina.setSize(150,30);
-    	nombreMedicina.setLocation(10,120);
+    	nombreMedicina.setLocation(10,80);
     	ss.add(nombreMedicina);
     	
     	
     	JTextField newNombreMedicina = new JTextField();
     	newNombreMedicina.setSize(150,30);
-    	newNombreMedicina.setLocation(120,120);
+    	newNombreMedicina.setLocation(120,80);
     	ss.add(newNombreMedicina);
     	
     	JLabel nombreVeterinario = new JLabel("ID de Veterinario: ");
     	nombreVeterinario.setSize(150,30);
-    	nombreVeterinario.setLocation(10,150);
+    	nombreVeterinario.setLocation(10,120);
     	ss.add(nombreVeterinario);
     	
     	
     	JTextField newNombreVeterinario = new JTextField();
     	newNombreVeterinario.setSize(150,30);
-    	newNombreVeterinario.setLocation(150,150);
+    	newNombreVeterinario.setLocation(150,120);
     	ss.add(newNombreVeterinario);
     	
     	
-    	JLabel idMascota = new JLabel("ID: ");
-    	idMascota.setSize(150,30);
-    	idMascota.setLocation(50,190);
+    	JLabel idMascota = new JLabel("Mascota a Modificar su ID: ");
+    	idMascota.setSize(300,30);
+    	idMascota.setLocation(10,150);
     	ss.add(idMascota);
     	
     	
     	JTextField idMascotaBuscar = new JTextField();
     	idMascotaBuscar.setSize(150,30);
-    	idMascotaBuscar.setLocation(120,190);
+    	idMascotaBuscar.setLocation(150,150);
     	ss.add(idMascotaBuscar);
     	
     	
     	
     	JButton s = new JButton("Actualizar");
-    	s.setLocation(180,240);
+    	s.setLocation(180,190);
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
@@ -125,14 +116,14 @@ public class mascotas_r extends javax.swing.JFrame {
 					        String nombreMedicina = newNombreMedicina.getText();
 					        String id= idMascotaBuscar.getText();
 					        String nombreMascota= newNombreMascota.getText();
-					        String nombreDueno = newNombreDueno.getText();
+					       
 					        String nombreVeterinario =newNombreVeterinario.getText();
 					        
 					        try {
 					        	
 						       
 
-						        String sql= "UPDATE mascotas SET nombre = '"+nombreMascota+"', fk_dueño = "+nombreDueno+", fk_medicina = "+
+						        String sql= "UPDATE mascotas SET nombre = '"+nombreMascota+"', fk_medicina = "+
 										nombreMedicina+", fk_veterinario = "+nombreVeterinario+" WHERE id="+id;
 								System.out.println(sql);
 								
