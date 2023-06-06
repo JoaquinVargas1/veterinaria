@@ -3,6 +3,8 @@ import com.mysql.jdbc.Connection;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +15,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
            
 public class main extends javax.swing.JFrame {
     //Variable para controlar los forms //Es global
@@ -186,6 +194,11 @@ public class main extends javax.swing.JFrame {
         actualizar.setText("Modificar");
         actualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         actualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
 
         recibo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         recibo.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\cuenta.png")); // NOI18N
@@ -648,6 +661,7 @@ public class main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error " +e.toString());
         }
         JOptionPane.showMessageDialog(null, "Borrado de la base de datos");
+       
         mostrar(tabla);
     }
     //Método para actualizar
@@ -656,8 +670,15 @@ public class main extends javax.swing.JFrame {
         conexion con = new conexion();
         Connection conexion = con.conectar();
                 //select * from tipo where nombre_tipo = 'pupi'
+        //UPDATE nombre_de_la_tabla SET columna1 = valor1, columna2 = valor2, ... WHERE condicion;
+        		
                 String sql = "delete from " + tabla + " where " + columna + " = '" + valor + "'";
                 System.out.println(sql);
+                
+               System.out.println("Dasdas");
+                    medicinas_r medicina = new medicinas_r();
+                    medicina.actualizarDatos();
+          
         try{
             st = conexion.createStatement();
             st.executeUpdate(sql);
@@ -756,10 +777,206 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
         ticket();
     }//GEN-LAST:event_reciboActionPerformed
-
     
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reciboActionPerformed
+        // TODO add your handling code here:
+    	switch(presionado){
+        case 1:
+            //Objeto del formulario dueños
+            dueños ob= new dueños();
+            ob.actualizarDatos();
+            //ob.setVisible(true);
+            break;
+        case 2:
+            mascotas_r mascota = new mascotas_r();
+            mascota.actualizarDatos();
+           // mascota.setVisible(true);
+            break;
+        case 3:
+            medicinas_r medicina = new medicinas_r();
+            medicina.actualizarDatos();
+            //medicina.setVisible(true);
+           
+            break;
+        case 4:
+        	actualizarDatosTablaVeterinarios();
+        break;
+        case 5:
+        	actualizarDatosTablaTipos();
+        break;
+    }
+    	
+  
+    }//GEN-LAST:event_reciboActionPerformed
+
+    public void actualizarDatosTablaVeterinarios() {
+      	JFrame f= new JFrame();
+    	f.setLayout(null);
+    	f.setSize(500,600);
+    	f.setLocation(0,0);
+    	f.setVisible(true);
+    	JPanel ss = new JPanel();
+    	ss.setSize(300,600);
+    	ss.setLocation(0,0);
+    	ss.setLayout(null);
+    	
+    	JLabel nombreV = new JLabel("Nombre de Veterinario: ");
+    	nombreV.setSize(150,30);
+    	nombreV.setLocation(10,50);
+    	ss.add(nombreV);
+    	
+    	
+    	JTextField newNombreVText = new JTextField();
+    	newNombreVText.setSize(150,30);
+    	newNombreVText.setLocation(140,50);
+    	ss.add(newNombreVText);
+    	
+    	JLabel telefonoLabel = new JLabel("Telefono: ");
+    	telefonoLabel.setSize(150,30);
+    	telefonoLabel.setLocation(10,80);
+    	ss.add(telefonoLabel);
+    	
+    	JTextField telefonoText = new JTextField();
+    	telefonoText.setSize(150,30);
+    	telefonoText.setLocation(120,80);
+    	ss.add(telefonoText);
+    	
+    	
+    	JLabel idV = new JLabel("ID: ");
+    	idV.setSize(150,30);
+    	idV.setLocation(50,170);
+    	ss.add(idV);
+    	
+    	
+    	JTextField idVBuscar = new JTextField();
+    	idVBuscar.setSize(150,30);
+    	idVBuscar.setLocation(120,170);
+    	ss.add(idVBuscar);
+    	
+    	
+    	
+    	JButton s = new JButton("Actualizar");
+    	s.setLocation(180,240);
+    	s.setSize(100,30);
+    	s.setVisible(true);
+    	ss.add(s);
+    	f.add(ss);
+    	
+    	s.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+		        
+
+						 Statement st;
+					        conexion con = new conexion();
+					        Connection conexion = con.conectar();
+					             
+					        String nombreV = newNombreVText.getText();  
+					     
+					        String telefono= telefonoText.getText();
+					        String id= idVBuscar.getText();
+					        
+							String sql= "UPDATE veterinario SET nombre_vet = '"+nombreV+"', telefono = '"+telefono+"' WHERE id_v = "+id;
+							System.out.println(sql);
+					        try{
+					            st = conexion.createStatement();
+					            st.executeUpdate(sql);
+					            
+					        }catch(SQLException e1)
+					        {
+					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        }
+			}});
+    }
+    public void actualizarDatosTablaTipos() {
+      	JFrame f= new JFrame();
+    	f.setLayout(null);
+    	f.setSize(500,600);
+    	f.setLocation(0,0);
+    	f.setVisible(true);
+    	JPanel ss = new JPanel();
+    	ss.setSize(300,600);
+    	ss.setLocation(0,0);
+    	ss.setLayout(null);
+    	
+    	JLabel nombreTipo = new JLabel("Nombre Tipo: ");
+    	nombreTipo.setSize(150,30);
+    	nombreTipo.setLocation(10,50);
+    	ss.add(nombreTipo);
+    	
+    	
+    	JTextField newNombreTipoText = new JTextField();
+    	newNombreTipoText.setSize(150,30);
+    	newNombreTipoText.setLocation(120,50);
+    	ss.add(newNombreTipoText);
+    	
+    	JLabel precioLabel = new JLabel("Precio: ");
+    	precioLabel.setSize(150,30);
+    	precioLabel.setLocation(10,80);
+    	ss.add(precioLabel);
+    	
+    	JTextField precioText = new JTextField();
+    	precioText.setSize(150,30);
+    	precioText.setLocation(120,80);
+    	ss.add(precioText);
+    	
+    	
+    	JLabel idPrecioBuscarLabel = new JLabel("ID: ");
+    	idPrecioBuscarLabel.setSize(150,30);
+    	idPrecioBuscarLabel.setLocation(50,170);
+    	ss.add(idPrecioBuscarLabel);
+    	
+    	
+    	JTextField idPrecioBuscar = new JTextField();
+    	idPrecioBuscar.setSize(150,30);
+    	idPrecioBuscar.setLocation(120,170);
+    	ss.add(idPrecioBuscar);
+    	
+    	
+    	
+    	JButton s = new JButton("Actualizar");
+    	s.setLocation(180,240);
+    	s.setSize(100,30);
+    	s.setVisible(true);
+    	ss.add(s);
+    	f.add(ss);
+    	
+    	s.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+		        
+
+						 Statement st;
+					        conexion con = new conexion();
+					        Connection conexion = con.conectar();
+					             
+					        String nombreTipo = newNombreTipoText.getText();  
+					     
+					        String precio= precioText.getText();
+					        String id= idPrecioBuscar.getText();
+					        
+							String sql= "UPDATE tipo SET nombre_tipo = '"+nombreTipo+"', precio = '"+precio+"' WHERE id_tipo = "+id;
+							System.out.println(sql);
+					        try{
+					            st = conexion.createStatement();
+					            st.executeUpdate(sql);
+					            
+					        }catch(SQLException e1)
+					        {
+					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        }
+			}});
+    }
     private void insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarActionPerformed
         // TODO add your handling code here:
+    	
+        //select * from tipo where nombre_tipo = 'pupi'
+       
+	    
         switch(presionado){
             case 1:
                 //Objeto del formulario dueños
