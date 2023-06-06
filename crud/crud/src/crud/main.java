@@ -715,62 +715,93 @@ public class main extends javax.swing.JFrame {
 
     //Método para generar el Ticket
     public void ticket(){
+    	
+    	
         //Creación del archivo
-        try{
-        String ruta = "C:\\Users\\52999\\Documents\\Ticket\\recibo.txt";
-            File file = new File(ruta);
-            // Si el archivo no existe es creado
-            if (!file.exists()) {
-                file.createNewFile();
+        //String ruta = "C:\\Users\\52612\\OneDrive\\Documentos\\Ticket\\recibo.txt";
+        	String nombre =JOptionPane.showInputDialog("Digite el id de su mascota") ;
+        	int numero = Integer.parseInt(nombre); 
+        	if(numero >=1 ) {
+        		
+        		
+        		
+        		///////////////
+        		
+        		try{
+        		File file = new File("Ticket");
+                // Si el archivo no existe es creado
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                
+                
+                
+                //Se hace la consulta para guardar los valores;
+            String consulta = "select nombre_vet as 'Atentido por:', nombre as 'Mascota', nombre_medicina as 'Medicamento:', nombre_tipo as 'Tipo de medicina', precio as 'Precio($):' "
+                    + "from veterinario v inner join mascotas m on v.id_v = m.id inner join medicinas med on med.id_medicina = m.id inner join tipo t on m.id = t.id_tipo "
+                    + "where m.id='"+nombre+"'";
+            Statement st;
+            conexion con = new conexion();
+            Connection conexion = con.conectar();
+            
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Atendido por:");
+            model.addColumn("Mascota:");
+            model.addColumn("Medicamento:");
+            model.addColumn("Tipo Medicina:");
+            model.addColumn("Precio($)");
+            
+            visor.setModel(model);
+            
+            String [] dato = new String [5];
+            try{
+                st = conexion.createStatement();
+                ResultSet rs = st.executeQuery(consulta);
+                while(rs.next()){
+                    dato[0]=rs.getString(1);
+                    dato[1]=rs.getString(2);
+                    dato[2]=rs.getString(3);
+                    dato[3]=rs.getString(4);
+                    dato[4]=rs.getString(5);
+                    model.addRow(dato);
+                }
+            }catch(SQLException e)
+            {
+                e.printStackTrace();
             }
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            //Se hace la consulta para guardar los valores;
-        String consulta = "select nombre_vet as 'Atentido por:', nombre as 'Mascota', nombre_medicina as 'Medicamento:', nombre_tipo as 'Tipo de medicina', precio as 'Precio($):' "
-                + "from veterinario v inner join mascotas m on v.id_v = m.id inner join medicinas med on med.id_medicina = m.id inner join tipo t on m.id = t.id_tipo "
-                + "where v.nombre_vet='Wiliam López'";
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
-        
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Atendido por:");
-        model.addColumn("Mascota:");
-        model.addColumn("Medicamento:");
-        model.addColumn("Tipo Medicina:");
-        model.addColumn("Precio($)");
-        
-        visor.setModel(model);
-        
-        String [] dato = new String [5];
-        try{
-            st = conexion.createStatement();
-            ResultSet rs = st.executeQuery(consulta);
-            while(rs.next()){
-                dato[0]=rs.getString(1);
-                dato[1]=rs.getString(2);
-                dato[2]=rs.getString(3);
-                dato[3]=rs.getString(4);
-                dato[4]=rs.getString(5);
-                model.addRow(dato);
-            }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        String texto [] = {"Atendido por: ","Mascota: ","Medicamento: ","Tipo Medicina: ","Precio($): "};
-        bw.write("VETERINARIA ANIMALES DEL MUNDO");
-        for(int i=0; i<dato.length; i++){
-            bw.write(texto[i] + dato[i]);
+            String texto [] = {"-Atendido por: ","-Mascota: ","-Medicamento: ","-Tipo Medicina: ","-Precio($): ",};
+            bw.write("__VETERINARIA ANIMALES DEL MUNDO__");
             bw.newLine();
-        }
-            bw.write(LocalDateTime.now().toString());
-            bw.write("Gracias por su preferencia");
-            bw.close();
-            JOptionPane.showMessageDialog(null, "Recibo creado correctamente " + ruta);
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Error: " + e.toString());
-        }
+            bw.newLine();
+            for(int i=0; i<dato.length; i++){
+                bw.write(texto[i] + dato[i]);
+                bw.newLine();
+            }
+                bw.write("-Fecha y hora: "+LocalDateTime.now().toString());
+                bw.newLine();
+                bw.newLine();
+                
+                
+                
+                bw.write("Gracias por su preferencia...");
+                bw.close();
+                
+                
+            }catch(IOException e){
+                JOptionPane.showMessageDialog(null, "Error: " + e.toString());
+            }
+        		
+        		
+        		JOptionPane.showMessageDialog(null, "Recibo creado correctamente ");
+        		
+        		//caso contrario no se encontro nada	
+        	}else {
+        		JOptionPane.showMessageDialog(null, "ID no encontrado");
+        	}
+        	
+            
         
     }
     
