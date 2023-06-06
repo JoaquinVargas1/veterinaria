@@ -852,9 +852,9 @@ public class main extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
-    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
-    	actualizarDatos.setSize(300,30);
-    	actualizarDatos.setLocation(120,5);
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos Veterinarios");
+    	actualizarDatos.setSize(1000,30);
+    	actualizarDatos.setLocation(20,5);
     	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
     	ss.add(actualizarDatos);
     	
@@ -881,15 +881,15 @@ public class main extends javax.swing.JFrame {
     	
     	
     	
-    	JLabel idV = new JLabel("ID: ");
-    	idV.setSize(150,30);
-    	idV.setLocation(50,170);
+    	JLabel idV = new JLabel("ID del Veterinario a Modificar: ");
+    	idV.setSize(500,30);
+    	idV.setLocation(10,170);
     	ss.add(idV);
     	
     	
     	JTextField idVBuscar = new JTextField();
     	idVBuscar.setSize(150,30);
-    	idVBuscar.setLocation(120,170);
+    	idVBuscar.setLocation(180,170);
     	ss.add(idVBuscar);
     	
     	
@@ -947,9 +947,9 @@ public class main extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
-    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
-    	actualizarDatos.setSize(300,30);
-    	actualizarDatos.setLocation(120,5);
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos de Tipos ");
+    	actualizarDatos.setSize(700,30);
+    	actualizarDatos.setLocation(40,5);
     	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
     	ss.add(actualizarDatos);
     	
@@ -975,15 +975,15 @@ public class main extends javax.swing.JFrame {
     	ss.add(precioText);
     	
     	
-    	JLabel idPrecioBuscarLabel = new JLabel("ID: ");
-    	idPrecioBuscarLabel.setSize(150,30);
+    	JLabel idPrecioBuscarLabel = new JLabel("ID del Tipo a Modificar: ");
+    	idPrecioBuscarLabel.setSize(500,30);
     	idPrecioBuscarLabel.setLocation(50,170);
     	ss.add(idPrecioBuscarLabel);
     	
     	
     	JTextField idPrecioBuscar = new JTextField();
     	idPrecioBuscar.setSize(150,30);
-    	idPrecioBuscar.setLocation(120,170);
+    	idPrecioBuscar.setLocation(180,170);
     	ss.add(idPrecioBuscar);
     	
     	
@@ -1024,7 +1024,7 @@ public class main extends javax.swing.JFrame {
 					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
 
 					        }catch(Exception e1) {
-					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un Precio Valido o un ID valido ");
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un Precio Valido o un ID valido ó que estos existan");
 
 					        }
 					        
