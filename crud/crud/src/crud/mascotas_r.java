@@ -210,10 +210,32 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel6.setText("Telefono");
 
         subir_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        subir_vet.setText("Guardar");
+        subir_vet.setText("Guardar Mascota");
+        subir_vet.addActionListener(new java.awt.event.ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				subir_Mascota(e);
+				
+				
+			}
+        	
+       	
+        });
 
         nuevo_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nuevo_vet.setText("Limpiar");
+        nuevo_vet.setText("Guardar Vet");
+        nuevo_vet.addActionListener(new java.awt.event.ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				subir_vet(e);
+			}
+        	
+        	
+        	
+        });
 
         cerrar_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_vet.setText("Cerrar");
@@ -314,6 +336,66 @@ public class mascotas_r extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    
+    
+    
+    
+    
+    private void subir_Mascota(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+        // TODO add your handling code here:
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                medicinas_r m= new medicinas_r();
+                Object med = list_med.getSelectedItem();
+                Object vet =list_veterinario.getSelectedItem();
+                String sql = "insert into mascotas(nombre,fk_medicina,fk_veterinario) values "
+                        + "('"+nombre_m.getText()+"','"+med+"','"+vet +"')";
+                System.out.println(sql);
+        try{
+            st = conexion.createStatement();
+            st.executeUpdate(sql);
+            
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+        }
+        JOptionPane.showMessageDialog(null, "Registro exitoso");
+        main os = new main();
+        os.mostrar("mascotas_r");
+    }
+    
+    private void subir_vet(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+        // TODO add your handling code here:
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                medicinas_r m= new medicinas_r();
+                
+                String sql = "insert into veterinario(nombre_vet,telefono) values "
+                        +  "('"+nombre_vet.getText()+"','"+telefono_vet.getText()+"')";
+                	//	"("+nombre_vet.getText()+","+telefono_vet.getText()+")";
+                System.out.println(sql);
+        try{
+            st = conexion.createStatement();
+            st.executeUpdate(sql);
+            
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+            System.out.println(e.toString());
+        }
+        JOptionPane.showMessageDialog(null, "Registro exitoso");
+        main os = new main();
+        os.mostrar("mascotas_r");
+    }
+    
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -171,10 +171,28 @@ public class medicinas_r extends javax.swing.JFrame {
         precio_tipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         subir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        subir.setText("Guardar");
+        subir.setText("Guardar Medicamento");
+        subir.addActionListener(new java.awt.event.ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				subir_medicamento(e);
+			}
+        	
+        });
 
         nuevo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nuevo.setText("Limpiar");
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				subir_tipo(e);
+			}
+        	
+        	
+        	
+        });
 
         cerrar_med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_med.setText("Cerrar");
@@ -264,6 +282,62 @@ public class medicinas_r extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    
+    
+    private void subir_medicamento(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+        // TODO add your handling code here:
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                medicinas_r m= new medicinas_r();
+                Object tm= list_tipo.getSelectedItem();
+                String sql = "insert into medicinas(nombre_medicina,fk_tipo) values "
+                        + "('"+nombre_med.getText()+"','"+tm+"')";
+                System.out.println(sql);
+        try{
+            st = conexion.createStatement();
+            st.executeUpdate(sql);
+            
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+        }
+        JOptionPane.showMessageDialog(null, "Registro exitoso");
+        main os = new main();
+        os.mostrar("medicinar_r");
+    }
+    
+    private void subir_tipo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+        // TODO add your handling code here:
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                medicinas_r m= new medicinas_r();
+                
+                String sql = "insert into tipo(nombre_tipo,precio) values "
+                        +  "('"+nombre_tipo.getText()+"','"+precio_tipo.getText()+"')";
+                
+                System.out.println(sql);
+        try{
+            st = conexion.createStatement();
+            st.executeUpdate(sql);
+            
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+            System.out.println(e.toString());
+        }
+        JOptionPane.showMessageDialog(null, "Registro exitoso");
+        main os = new main();
+        os.mostrar("medicinas_r");
+    }
+    
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

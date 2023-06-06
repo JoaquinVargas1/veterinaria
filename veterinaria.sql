@@ -47,7 +47,6 @@ insert into medicinas (nombre_medicina,fk_tipo) values("Gotas 150g",5);
 create table mascotas(
 id int not null auto_increment,
 nombre varchar(30),
-fk_dueño int not null,
 fk_medicina int not null,
 fk_veterinario int not null,
 primary key(id),
@@ -60,19 +59,20 @@ insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Baxter',3,5);
 insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Garfield',5,3);
 insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Pelos',4,2);
 insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Conchito',1,6);
-create table dueño
-(
-id_dueño int not null auto_increment,
-nombre_dueño varchar(30),
-telefono varchar(10),
-direccion varchar(50),
-fk_mascota int not null,
-primary key(id_dueño),
-constraint foreign key(fk_mascota) references mascotas(id)
+
+create table dueño (
+  id_dueño int not null auto_increment,
+  nombre_dueño varchar(30),
+  telefono varchar(10),
+  direccion varchar(50),
+  fk_mascota int not null,
+  primary key (id_dueño),
+  constraint foreign key (fk_mascota) references mascotas (id)
 );
-insert into dueño(nombre_dueño,telefono,direccion,fk_mascota)values('María','0991238976','Calle 23 x 45 s/n',1);
-insert into dueño(nombre_dueño,telefono,direccion,fk_mascota)values('Laura','9491238976','colonia padre 34 c',1);
-insert into dueño(nombre_dueño,telefono,direccion,fk_mascota)values('Maribel','1991238976','calle 34 x 45',1);
-insert into dueño(nombre_dueño,telefono,direccion,fk_mascota)values('Rubí','9911238976','34 x 5 ni 1',1);
-insert into dueño(nombre_dueño,telefono,direccion,fk_mascota)values('Daniela','9391238976','Calle 34 x 56 colonia',1);
-insert into dueño(nombre_dueño,telefono,direccion,fk_mascota)values('Mario','9992238976','Calle 11 x 18 s/n',1);
+
+insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('María', '0991238976', 'Calle 23 x 45 s/n', 1);
+insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Laura', '9491238976', 'colonia padre 34 c', 2);
+insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Maribel', '1991238976', 'calle 34 x 45', 3);
+insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Rubí', '9911238976', '34 x 5 ni 1', 4);
+insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Daniela', '9391238976', 'Calle 34 x 56 colonia', 5);
+insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Mario', '9992238976', 'Calle 11 x 18 s/n', 6);

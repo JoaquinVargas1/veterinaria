@@ -375,7 +375,7 @@ public class main extends javax.swing.JFrame {
                 model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Medicamento");
-        model.addColumn("Dueño");
+        model.addColumn("Veterinario");
         
         visor.setModel(model);
         

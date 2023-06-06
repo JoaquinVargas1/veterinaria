@@ -335,6 +335,7 @@ public class dueños extends javax.swing.JFrame {
                 String sql = "insert into dueño(nombre_dueño,telefono,direccion,fk_mascota) values "
                         + "('"+nombre_d.getText()+"','"+telefono_d.getText()+"','"+direccion_d.getText()+"','"+v+"')";
                 System.out.println(sql);
+                JOptionPane.showMessageDialog(null, "Registro exitoso");
                 System.out.println("consulta hecha");
         try{
             st = conexion.createStatement();
