@@ -1,10 +1,19 @@
 package crud;
 
 import com.mysql.jdbc.Connection;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -18,6 +27,112 @@ public class dueños extends javax.swing.JFrame {
         conecta.llenaCombo("mascotas", "id", lista_mascota);
     }
 
+    public void actualizarDatos() {
+    	JFrame f= new JFrame();
+    	f.setLayout(null);
+    	f.setSize(500,600);
+    	f.setLocation(0,0);
+    	f.setVisible(true);
+    	JPanel ss = new JPanel();
+    	ss.setSize(300,600);
+    	ss.setLocation(0,0);
+    	ss.setLayout(null);
+    	
+    	JLabel nombreDueno = new JLabel("Nombre de Dueño: ");
+    	nombreDueno.setSize(150,30);
+    	nombreDueno.setLocation(10,50);
+    	ss.add(nombreDueno);
+    	
+    	
+    	JTextField newNombreDueno = new JTextField();
+    	newNombreDueno.setSize(150,30);
+    	newNombreDueno.setLocation(120,50);
+    	ss.add(newNombreDueno);
+    	
+    	JLabel telefonoLabel = new JLabel("Telefono: ");
+    	telefonoLabel.setSize(150,30);
+    	telefonoLabel.setLocation(10,80);
+    	ss.add(telefonoLabel);
+    	
+    	JTextField telefonoText = new JTextField();
+    	telefonoText.setSize(150,30);
+    	telefonoText.setLocation(120,80);
+    	ss.add(telefonoText);
+    	
+
+    	JLabel direccionLabel = new JLabel("Direccion: ");
+    	direccionLabel.setSize(150,30);
+    	direccionLabel.setLocation(10,110);
+    	ss.add(direccionLabel);
+    	
+    	
+    	JTextField direccionText = new JTextField();
+    	direccionText.setSize(150,30);
+    	direccionText.setLocation(120,110);
+    	ss.add(direccionText);
+    	
+    	JLabel fk_mascota = new JLabel("Nombre de Medicina: ");
+    	fk_mascota.setSize(150,30);
+    	fk_mascota.setLocation(10,140);
+    	ss.add(fk_mascota);
+    	
+    	JTextField fk_mascotaText = new JTextField();
+    	fk_mascotaText.setSize(150,30);
+    	fk_mascotaText.setLocation(120,140);
+    	ss.add(fk_mascotaText);
+    	
+    	
+    	
+    	JLabel idDueno = new JLabel("ID: ");
+    	idDueno.setSize(150,30);
+    	idDueno.setLocation(50,170);
+    	ss.add(idDueno);
+    	
+    	
+    	JTextField idDuenoBuscar = new JTextField();
+    	idDuenoBuscar.setSize(150,30);
+    	idDuenoBuscar.setLocation(120,170);
+    	ss.add(idDuenoBuscar);
+    	
+    	
+    	
+    	JButton s = new JButton("Actualizar");
+    	s.setLocation(180,240);
+    	s.setSize(100,30);
+    	s.setVisible(true);
+    	ss.add(s);
+    	f.add(ss);
+    	
+    	s.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+		        
+
+						 Statement st;
+					        conexion con = new conexion();
+					        Connection conexion = con.conectar();
+					             
+					        String nombreDueno = newNombreDueno.getText();  
+					        String id= idDuenoBuscar.getText();
+					        String direccion = direccionText.getText();
+					        String telefono= telefonoText.getText();
+					        String fkMascota = fk_mascotaText.getText();
+					        
+							String sql= "UPDATE dueño SET nombre_dueño = '"+nombreDueno+"', telefono = '"+telefono+"', direccion = '"+
+									direccion+"', fk_mascota = '"+fkMascota+"' WHERE id_dueño = "+id;
+							System.out.println(sql);
+					        try{
+					            st = conexion.createStatement();
+					            st.executeUpdate(sql);
+					            
+					        }catch(SQLException e1)
+					        {
+					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        }
+			}});
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +166,8 @@ public class dueños extends javax.swing.JFrame {
 
         label_na.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         label_na.setText("Nombre");
-
+        
+        
         telefono_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         telefono_d.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +319,7 @@ public class dueños extends javax.swing.JFrame {
                 String sql = "insert into dueño(nombre_dueño,telefono,direccion,fk_mascota) values "
                         + "('"+nombre_d.getText()+"','"+telefono_d.getText()+"','"+direccion_d.getText()+"','"+v+"')";
                 System.out.println(sql);
+                System.out.println("consulta hecha");
         try{
             st = conexion.createStatement();
             st.executeUpdate(sql);
@@ -211,7 +328,7 @@ public class dueños extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Error " +e.toString());
         }
-        JOptionPane.showMessageDialog(null, "Borrado de la base de datos");
+       // JOptionPane.showMessageDialog(null, "Borrado de la base de datos");
         main os = new main();
         os.mostrar("dueños");
     }//GEN-LAST:event_subir_dueñoActionPerformed
