@@ -1,6 +1,7 @@
 package crud;
 import com.mysql.jdbc.Connection;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -820,6 +821,12 @@ public class main extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
+    	actualizarDatos.setSize(300,30);
+    	actualizarDatos.setLocation(120,5);
+    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
+    	ss.add(actualizarDatos);
+    	
     	JLabel nombreV = new JLabel("Nombre de Veterinario: ");
     	nombreV.setSize(150,30);
     	nombreV.setLocation(10,50);
@@ -842,6 +849,7 @@ public class main extends javax.swing.JFrame {
     	ss.add(telefonoText);
     	
     	
+    	
     	JLabel idV = new JLabel("ID: ");
     	idV.setSize(150,30);
     	idV.setLocation(50,170);
@@ -852,6 +860,8 @@ public class main extends javax.swing.JFrame {
     	idVBuscar.setSize(150,30);
     	idVBuscar.setLocation(120,170);
     	ss.add(idVBuscar);
+    	
+    	
     	
     	
     	
@@ -875,19 +885,24 @@ public class main extends javax.swing.JFrame {
 					             
 					        String nombreV = newNombreVText.getText();  
 					     
-					        String telefono= telefonoText.getText();
-					        String id= idVBuscar.getText();
 					        
-							String sql= "UPDATE veterinario SET nombre_vet = '"+nombreV+"', telefono = '"+telefono+"' WHERE id_v = "+id;
-							System.out.println(sql);
-					        try{
-					            st = conexion.createStatement();
+					        try {
+					        	int id= Integer.parseInt(idVBuscar.getText());
+						        int telefono= Integer.parseInt(telefonoText.getText());
+
+								String sql= "UPDATE veterinario SET nombre_vet = '"+nombreV+"', telefono = '"+telefono+"' WHERE id_v = "+id;
+								System.out.println(sql);
+								
+								st = conexion.createStatement();
 					            st.executeUpdate(sql);
-					            
-					        }catch(SQLException e1)
-					        {
-					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+
+					        }catch(Exception e1){
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID valido o un Telefono Valido ");
+
 					        }
+					        
+					      
 			}});
     }
     public void actualizarDatosTablaTipos() {
@@ -900,6 +915,12 @@ public class main extends javax.swing.JFrame {
     	ss.setSize(300,600);
     	ss.setLocation(0,0);
     	ss.setLayout(null);
+    	
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
+    	actualizarDatos.setSize(300,30);
+    	actualizarDatos.setLocation(120,5);
+    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
+    	ss.add(actualizarDatos);
     	
     	JLabel nombreTipo = new JLabel("Nombre Tipo: ");
     	nombreTipo.setSize(150,30);
@@ -954,21 +975,30 @@ public class main extends javax.swing.JFrame {
 					        conexion con = new conexion();
 					        Connection conexion = con.conectar();
 					             
-					        String nombreTipo = newNombreTipoText.getText();  
-					     
-					        String precio= precioText.getText();
-					        String id= idPrecioBuscar.getText();
-					        
-							String sql= "UPDATE tipo SET nombre_tipo = '"+nombreTipo+"', precio = '"+precio+"' WHERE id_tipo = "+id;
-							System.out.println(sql);
-					        try{
-					            st = conexion.createStatement();
-					            st.executeUpdate(sql);
-					            
-					        }catch(SQLException e1)
-					        {
-					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					       
+					        try {
+					        	
+						       
+					        	 String nombreTipo = newNombreTipoText.getText();
+							     
+							        double precio=  Double.parseDouble(precioText.getText());
+							        int id=  Integer.parseInt(idPrecioBuscar.getText());
+							        
+					        	String sql= "UPDATE tipo SET nombre_tipo = '"+nombreTipo+"', precio = '"+precio+"' WHERE id_tipo = "+id;
+								System.out.println(sql);
+					        	
+								  st = conexion.createStatement();
+						            st.executeUpdate(sql);
+						            
+					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+
+					        }catch(Exception e1) {
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un Precio Valido o un ID valido ");
+
 					        }
+					        
+							
+					       
 			}});
     }
     private void insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarActionPerformed
@@ -1077,3 +1107,4 @@ public class main extends javax.swing.JFrame {
     public javax.swing.JTable visor;
     // End of variables declaration//GEN-END:variables
 }
+
