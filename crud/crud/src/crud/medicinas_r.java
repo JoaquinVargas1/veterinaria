@@ -38,7 +38,7 @@ public class medicinas_r extends javax.swing.JFrame {
     	ss.setLayout(null);
     	
     	JLabel nombreMedicina = new JLabel("Nombre Medicina: ");
-    	nombreMedicina.setSize(100,30);
+    	nombreMedicina.setSize(170,30);
     	nombreMedicina.setLocation(10,50);
     	ss.add(nombreMedicina);
     	
@@ -49,21 +49,33 @@ public class medicinas_r extends javax.swing.JFrame {
     	ss.add(newNombreMedicina);
     	
     	
+    	JLabel tipoLabel = new JLabel("Tipo: ");
+    	tipoLabel.setSize(100,30);
+    	tipoLabel.setLocation(50,80);
+    	ss.add(tipoLabel);
+    	
+    	
+    	JTextField tipo = new JTextField();
+    	tipo.setSize(150,30);
+    	tipo.setLocation(120,80);
+    	ss.add(tipo);
+    	
+    	
     	JLabel idMedicina = new JLabel("ID: ");
     	idMedicina.setSize(100,30);
-    	idMedicina.setLocation(50,80);
+    	idMedicina.setLocation(50,120);
     	ss.add(idMedicina);
     	
     	
     	JTextField idMedicinabuscar = new JTextField();
     	idMedicinabuscar.setSize(150,30);
-    	idMedicinabuscar.setLocation(120,80);
+    	idMedicinabuscar.setLocation(120,120);
     	ss.add(idMedicinabuscar);
     	
     	
     	
     	JButton s = new JButton("Actualizar");
-    	s.setLocation(200,140);
+    	s.setLocation(200,170);
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
@@ -81,18 +93,28 @@ public class medicinas_r extends javax.swing.JFrame {
 					        Connection conexion = con.conectar();
 					             
 					        String nombreMedicina = newNombreMedicina.getText();
-					       // UPDATE medicinas SET nombre_medicina = "caca"  WHERE id_medicina=1;
-					       String id= idMedicinabuscar.getText();
-							String sql= "UPDATE medicinas SET nombre_medicina = '"+nombreMedicina+"' WHERE id_medicina="+id;
-							System.out.println(sql);
-					        try{
-					            st = conexion.createStatement();
-					            st.executeUpdate(sql);
-					            
-					        }catch(SQLException e1)
-					        {
-					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
-					        }
+					      
+						
+							
+							try {
+								
+							       int id= Integer.parseInt(idMedicinabuscar.getText());
+							       int fkTipo= Integer.parseInt(tipo.getText());
+
+								
+								String sql= "UPDATE medicinas SET nombre_medicina = '"+nombreMedicina+"', fk_tipo= "+fkTipo+" WHERE id_medicina="+id;
+								System.out.println(sql);
+								
+								 st = conexion.createStatement();
+						            st.executeUpdate(sql);
+						            
+						        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+
+							}catch(Exception e1) {
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID Valido donde se solicita y un Tipo valido (INT) ");
+
+							}
+					       
 			}});
     }
 
@@ -290,3 +312,4 @@ public class medicinas_r extends javax.swing.JFrame {
     public javax.swing.JButton subir;
     // End of variables declaration//GEN-END:variables
 }
+
