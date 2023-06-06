@@ -1,5 +1,18 @@
 package crud;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.mysql.jdbc.Connection;
 
 public class mascotas_r extends javax.swing.JFrame {
 
@@ -11,6 +24,113 @@ public class mascotas_r extends javax.swing.JFrame {
         conexion conecta=new conexion();
         conecta.llenaCombo("medicinas", "id_medicina", list_med);
         conecta.llenaCombo("veterinario", "id_v", list_veterinario);
+    }
+    
+    public void actualizarDatos() {
+    	JFrame f= new JFrame();
+    	f.setLayout(null);
+    	f.setSize(500,600);
+    	f.setLocation(0,0);
+    	f.setVisible(true);
+    	JPanel ss = new JPanel();
+    	ss.setSize(300,600);
+    	ss.setLocation(0,0);
+    	ss.setLayout(null);
+    	
+    	JLabel nombreMascota = new JLabel("Nombre de Mascota: ");
+    	nombreMascota.setSize(150,30);
+    	nombreMascota.setLocation(10,50);
+    	ss.add(nombreMascota);
+    	
+    	
+    	JTextField newNombreMascota = new JTextField();
+    	newNombreMascota.setSize(150,30);
+    	newNombreMascota.setLocation(120,50);
+    	ss.add(newNombreMascota);
+    	
+    	JLabel nombreDueno = new JLabel("Nombre de dueño: ");
+    	nombreDueno.setSize(150,30);
+    	nombreDueno.setLocation(10,80);
+    	ss.add(nombreDueno);
+    	
+    	
+    	JTextField newNombreDueno = new JTextField();
+    	newNombreDueno.setSize(150,30);
+    	newNombreDueno.setLocation(120,80);
+    	ss.add(newNombreDueno);
+    	
+    	JLabel nombreMedicina = new JLabel("Nombre de Medicina: ");
+    	nombreMedicina.setSize(150,30);
+    	nombreMedicina.setLocation(10,120);
+    	ss.add(nombreMedicina);
+    	
+    	
+    	JTextField newNombreMedicina = new JTextField();
+    	newNombreMedicina.setSize(150,30);
+    	newNombreMedicina.setLocation(120,120);
+    	ss.add(newNombreMedicina);
+    	
+    	JLabel nombreVeterinario = new JLabel("Nombre de Veterinario: ");
+    	nombreVeterinario.setSize(150,30);
+    	nombreVeterinario.setLocation(10,150);
+    	ss.add(nombreVeterinario);
+    	
+    	
+    	JTextField newNombreVeterinario = new JTextField();
+    	newNombreVeterinario.setSize(150,30);
+    	newNombreVeterinario.setLocation(150,150);
+    	ss.add(newNombreVeterinario);
+    	
+    	
+    	JLabel idMascota = new JLabel("ID: ");
+    	idMascota.setSize(150,30);
+    	idMascota.setLocation(50,190);
+    	ss.add(idMascota);
+    	
+    	
+    	JTextField idMascotaBuscar = new JTextField();
+    	idMascotaBuscar.setSize(150,30);
+    	idMascotaBuscar.setLocation(120,190);
+    	ss.add(idMascotaBuscar);
+    	
+    	
+    	
+    	JButton s = new JButton("Actualizar");
+    	s.setLocation(180,240);
+    	s.setSize(100,30);
+    	s.setVisible(true);
+    	ss.add(s);
+    	f.add(ss);
+    	
+    	s.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+		        
+
+						 Statement st;
+					        conexion con = new conexion();
+					        Connection conexion = con.conectar();
+					             
+					        String nombreMedicina = newNombreMedicina.getText();  
+					        String id= idMascotaBuscar.getText();
+					        String nombreMascota= newNombreMascota.getText();
+					        String nombreDueno = newNombreDueno.getText();
+					        String nombreVeterinario = newNombreVeterinario.getText();
+					        
+							String sql= "UPDATE mascotas SET nombre = '"+nombreMascota+"', fk_dueño = '"+nombreDueno+"', fk_medicina = '"+
+									nombreMedicina+"', fk_veterinario = '"+nombreVeterinario+"' WHERE id="+id;
+							System.out.println(sql);
+					        try{
+					            st = conexion.createStatement();
+					            st.executeUpdate(sql);
+					            
+					        }catch(SQLException e1)
+					        {
+					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        }
+			}});
     }
 
     /**
