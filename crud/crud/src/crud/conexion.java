@@ -15,7 +15,7 @@ public class conexion {
     // Declaramos los datos de conexion a la bd
     private static final String driver="com.mysql.jdbc.Driver";
     private static final String user="root";
-    private static final String pass="amor101215"; //aqui poner su contraseña de sql para que se pueda conectar
+    private static final String pass="12345"; //aqui poner su contraseña de sql para que se pueda conectar
     private static final String url="jdbc:mysql://localhost:3306/veterinaria?characterEncoding=utf8";
     // Funcion que va conectarse a mi bd de mysql
     public Connection conectar(){
@@ -23,11 +23,12 @@ public class conexion {
       try{
           con = (Connection) DriverManager.getConnection(url, user, pass);
           if(con!=null){
-              
+            
           }
       }
       catch(SQLException e)
       {
+    	  System.out.println("error::"+e);
           JOptionPane.showMessageDialog(null,"Error" + e.toString());
       }
       return con;
@@ -68,4 +69,3 @@ public class conexion {
         } 
     }
 }
-    
