@@ -16,6 +16,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,7 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
            
-public class main extends javax.swing.JFrame {
+public class main extends javax.swing.JFrame  {
     //Variable para controlar los forms //Es global
     public int presionado=0;
     public main() {
@@ -61,6 +63,8 @@ public class main extends javax.swing.JFrame {
         recibo = new javax.swing.JButton();
         list_tablas = new javax.swing.JComboBox<>();
         cerrar_main = new javax.swing.JButton();
+        
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
@@ -167,6 +171,7 @@ public class main extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
+       
         insertar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         insertar.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\Iconos\\add.png")); // NOI18N
         insertar.setText("Agregar");
@@ -329,10 +334,11 @@ public class main extends javax.swing.JFrame {
                     .addGap(39, 39, 39)
                     .addComponent(jLabel2)
                     .addContainerGap(674, Short.MAX_VALUE)))
+            
         );
-
+        
         dueños.getAccessibleContext().setAccessibleDescription("");
-
+        list_tablas.setVisible(false);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1112,7 +1118,9 @@ public class main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new main().setVisible(true);
+            	
+            	new main().setVisible(true);
+               
             }
         });
     }
