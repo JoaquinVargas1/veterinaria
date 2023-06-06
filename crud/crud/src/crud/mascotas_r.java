@@ -1,5 +1,6 @@
 package crud;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -37,6 +38,14 @@ public class mascotas_r extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
+    	
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
+    	actualizarDatos.setSize(300,30);
+    	actualizarDatos.setLocation(120,5);
+    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
+    	ss.add(actualizarDatos);
+
+    	
     	JLabel nombreMascota = new JLabel("Nombre de Mascota: ");
     	nombreMascota.setSize(150,30);
     	nombreMascota.setLocation(10,50);
@@ -48,7 +57,7 @@ public class mascotas_r extends javax.swing.JFrame {
     	newNombreMascota.setLocation(120,50);
     	ss.add(newNombreMascota);
     	
-    	JLabel nombreDueno = new JLabel("Nombre de dueño: ");
+    	JLabel nombreDueno = new JLabel("ID de dueño: ");
     	nombreDueno.setSize(150,30);
     	nombreDueno.setLocation(10,80);
     	ss.add(nombreDueno);
@@ -59,7 +68,7 @@ public class mascotas_r extends javax.swing.JFrame {
     	newNombreDueno.setLocation(120,80);
     	ss.add(newNombreDueno);
     	
-    	JLabel nombreMedicina = new JLabel("Nombre de Medicina: ");
+    	JLabel nombreMedicina = new JLabel("ID de Medicina: ");
     	nombreMedicina.setSize(150,30);
     	nombreMedicina.setLocation(10,120);
     	ss.add(nombreMedicina);
@@ -70,7 +79,7 @@ public class mascotas_r extends javax.swing.JFrame {
     	newNombreMedicina.setLocation(120,120);
     	ss.add(newNombreMedicina);
     	
-    	JLabel nombreVeterinario = new JLabel("Nombre de Veterinario: ");
+    	JLabel nombreVeterinario = new JLabel("ID de Veterinario: ");
     	nombreVeterinario.setSize(150,30);
     	nombreVeterinario.setLocation(10,150);
     	ss.add(nombreVeterinario);
@@ -113,23 +122,32 @@ public class mascotas_r extends javax.swing.JFrame {
 					        conexion con = new conexion();
 					        Connection conexion = con.conectar();
 					             
-					        String nombreMedicina = newNombreMedicina.getText();  
+					        String nombreMedicina = newNombreMedicina.getText();
 					        String id= idMascotaBuscar.getText();
 					        String nombreMascota= newNombreMascota.getText();
 					        String nombreDueno = newNombreDueno.getText();
-					        String nombreVeterinario = newNombreVeterinario.getText();
+					        String nombreVeterinario =newNombreVeterinario.getText();
 					        
-							String sql= "UPDATE mascotas SET nombre = '"+nombreMascota+"', fk_dueño = '"+nombreDueno+"', fk_medicina = '"+
-									nombreMedicina+"', fk_veterinario = '"+nombreVeterinario+"' WHERE id="+id;
-							System.out.println(sql);
-					        try{
-					            st = conexion.createStatement();
-					            st.executeUpdate(sql);
-					            
-					        }catch(SQLException e1)
-					        {
-					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        try {
+					        	
+						       
+
+						        String sql= "UPDATE mascotas SET nombre = '"+nombreMascota+"', fk_dueño = "+nombreDueno+", fk_medicina = "+
+										nombreMedicina+", fk_veterinario = "+nombreVeterinario+" WHERE id="+id;
+								System.out.println(sql);
+								
+					        	
+								 st = conexion.createStatement();
+						         st.executeUpdate(sql);
+						         
+					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+
+					        }catch(Exception e1) {
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de tipo entero (INT) donde se solicite ID ó que existan ");
+
 					        }
+					      
+				
 			}});
     }
 
