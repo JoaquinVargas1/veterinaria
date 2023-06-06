@@ -2,6 +2,7 @@ package crud;
 
 import com.mysql.jdbc.Connection;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -38,8 +39,15 @@ public class dueños extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos ");
+    	actualizarDatos.setSize(300,30);
+    	actualizarDatos.setLocation(120,5);
+    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
+
+    	ss.add(actualizarDatos);
+    	
     	JLabel nombreDueno = new JLabel("Nombre de Dueño: ");
-    	nombreDueno.setSize(150,30);
+    	nombreDueno.setSize(140,30);
     	nombreDueno.setLocation(10,50);
     	ss.add(nombreDueno);
     	
@@ -71,7 +79,7 @@ public class dueños extends javax.swing.JFrame {
     	direccionText.setLocation(120,110);
     	ss.add(direccionText);
     	
-    	JLabel fk_mascota = new JLabel("Nombre de Medicina: ");
+    	JLabel fk_mascota = new JLabel("ID de Mascota ");
     	fk_mascota.setSize(150,30);
     	fk_mascota.setLocation(10,140);
     	ss.add(fk_mascota);
@@ -104,7 +112,7 @@ public class dueños extends javax.swing.JFrame {
     	f.add(ss);
     	
     	s.addActionListener(new ActionListener() {
-
+    		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -118,19 +126,27 @@ public class dueños extends javax.swing.JFrame {
 					        String id= idDuenoBuscar.getText();
 					        String direccion = direccionText.getText();
 					        String telefono= telefonoText.getText();
-					        String fkMascota = fk_mascotaText.getText();
 					        
-							String sql= "UPDATE dueño SET nombre_dueño = '"+nombreDueno+"', telefono = '"+telefono+"', direccion = '"+
-									direccion+"', fk_mascota = '"+fkMascota+"' WHERE id_dueño = "+id;
-							System.out.println(sql);
-					        try{
-					            st = conexion.createStatement();
+					        try {
+						        int fkMascota = Integer.parseInt(fk_mascotaText.getText());
+
+						        String sql= "UPDATE dueño SET nombre_dueño = '"+nombreDueno+"', telefono = '"+telefono+"', direccion = '"+
+										direccion+"', fk_mascota = "+fkMascota+" WHERE id_dueño = "+id;
+								System.out.println(sql);
+								
+								st = conexion.createStatement();
 					            st.executeUpdate(sql);
 					            
-					        }catch(SQLException e1)
-					        {
-					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+
+					        }catch(Exception e1) {
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de mascota de tipo entero (INT) al igual que en ID ó que existan ");
 					        }
+					        
+					        
+					        
+							
+					        
 			}});
     }
     /**
@@ -383,3 +399,4 @@ public class dueños extends javax.swing.JFrame {
     public javax.swing.JTextField telefono_d;
     // End of variables declaration//GEN-END:variables
 }
+
