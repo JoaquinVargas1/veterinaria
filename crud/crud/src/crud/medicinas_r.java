@@ -1,5 +1,19 @@
 package crud;
 
+import javax.swing.JPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import  javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.mysql.jdbc.Connection;
 
 public class medicinas_r extends javax.swing.JFrame {
 
@@ -10,6 +24,76 @@ public class medicinas_r extends javax.swing.JFrame {
         initComponents();
         conexion con = new conexion();
         con.llenaCombo("tipo", "id_tipo", list_tipo);
+    }
+    
+    public void actualizarDatos() {
+    	JFrame f= new JFrame();
+    	f.setLayout(null);
+    	f.setSize(500,600);
+    	f.setLocation(0,0);
+    	f.setVisible(true);
+    	JPanel ss = new JPanel();
+    	ss.setSize(300,600);
+    	ss.setLocation(0,0);
+    	ss.setLayout(null);
+    	
+    	JLabel nombreMedicina = new JLabel("Nombre Medicina: ");
+    	nombreMedicina.setSize(100,30);
+    	nombreMedicina.setLocation(10,50);
+    	ss.add(nombreMedicina);
+    	
+    	
+    	JTextField newNombreMedicina = new JTextField();
+    	newNombreMedicina.setSize(150,30);
+    	newNombreMedicina.setLocation(120,50);
+    	ss.add(newNombreMedicina);
+    	
+    	
+    	JLabel idMedicina = new JLabel("ID: ");
+    	idMedicina.setSize(100,30);
+    	idMedicina.setLocation(50,80);
+    	ss.add(idMedicina);
+    	
+    	
+    	JTextField idMedicinabuscar = new JTextField();
+    	idMedicinabuscar.setSize(150,30);
+    	idMedicinabuscar.setLocation(120,80);
+    	ss.add(idMedicinabuscar);
+    	
+    	
+    	
+    	JButton s = new JButton("Actualizar");
+    	s.setLocation(200,140);
+    	s.setSize(100,30);
+    	s.setVisible(true);
+    	ss.add(s);
+    	f.add(ss);
+    	
+    	s.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+		        
+
+						 Statement st;
+					        conexion con = new conexion();
+					        Connection conexion = con.conectar();
+					             
+					        String nombreMedicina = newNombreMedicina.getText();
+					       // UPDATE medicinas SET nombre_medicina = "caca"  WHERE id_medicina=1;
+					       String id= idMedicinabuscar.getText();
+							String sql= "UPDATE medicinas SET nombre_medicina = '"+nombreMedicina+"' WHERE id_medicina="+id;
+							System.out.println(sql);
+					        try{
+					            st = conexion.createStatement();
+					            st.executeUpdate(sql);
+					            
+					        }catch(SQLException e1)
+					        {
+					            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+					        }
+			}});
     }
 
     /**
