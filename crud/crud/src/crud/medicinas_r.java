@@ -37,6 +37,12 @@ public class medicinas_r extends javax.swing.JFrame {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos Medicamento");
+    	actualizarDatos.setSize(900,30);
+    	actualizarDatos.setLocation(10,5);
+    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
+    	ss.add(actualizarDatos);
+
     	JLabel nombreMedicina = new JLabel("Nombre Medicina: ");
     	nombreMedicina.setSize(170,30);
     	nombreMedicina.setLocation(10,50);
@@ -61,15 +67,15 @@ public class medicinas_r extends javax.swing.JFrame {
     	ss.add(tipo);
     	
     	
-    	JLabel idMedicina = new JLabel("ID: ");
-    	idMedicina.setSize(100,30);
-    	idMedicina.setLocation(50,120);
+    	JLabel idMedicina = new JLabel("ID del Medicamento a Modificar: ");
+    	idMedicina.setSize(300,30);
+    	idMedicina.setLocation(20,120);
     	ss.add(idMedicina);
     	
     	
     	JTextField idMedicinabuscar = new JTextField();
     	idMedicinabuscar.setSize(150,30);
-    	idMedicinabuscar.setLocation(120,120);
+    	idMedicinabuscar.setLocation(220,120);
     	ss.add(idMedicinabuscar);
     	
     	
@@ -111,7 +117,7 @@ public class medicinas_r extends javax.swing.JFrame {
 						        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
 
 							}catch(Exception e1) {
-					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID Valido donde se solicita y un Tipo valido (INT) ");
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID Valido donde se solicita y un Tipo valido (INT) ó que estos existan");
 
 							}
 					       
