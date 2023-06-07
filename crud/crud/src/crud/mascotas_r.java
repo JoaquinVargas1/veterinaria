@@ -159,7 +159,7 @@ public class mascotas_r extends javax.swing.JFrame {
         list_veterinario = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        nombre_vet = new javax.swing.JTextField();
+        nombre_vet = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         telefono_vet = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -167,6 +167,8 @@ public class mascotas_r extends javax.swing.JFrame {
         nuevo_vet = new javax.swing.JButton();
         cerrar_vet = new javax.swing.JButton();
 
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -187,19 +189,28 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Registro Mascotas");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        
+       /* jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Veterinarios");
 
         nombre_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel5.setText("Nombre");
-
-        telefono_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("Telefono");
 
+        telefono_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        
+*/
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setText("Dueño");
+        
+        nombre_vet.setFont(new java.awt.Font("Arial", 0, 12));
+        nombre_vet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dueño" }));
+        
+        telefono_vet.setVisible(false);
+       
+        
         subir_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         subir_vet.setText("Guardar Mascota");
         subir_vet.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +225,7 @@ public class mascotas_r extends javax.swing.JFrame {
        	
         });
 
-        nuevo_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        /*nuevo_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nuevo_vet.setText("Guardar Vet");
         nuevo_vet.addActionListener(new java.awt.event.ActionListener() {
 
@@ -226,7 +237,7 @@ public class mascotas_r extends javax.swing.JFrame {
         	
         	
         	
-        });
+        });*/
 
         cerrar_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_vet.setText("Cerrar");
@@ -244,8 +255,8 @@ public class mascotas_r extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(nuevo_vet)
-                        .addGap(43, 43, 43)
+                       // .addComponent(nuevo_vet)
+                        //.addGap(43, 43, 43)
                         .addComponent(subir_vet))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,14 +315,14 @@ public class mascotas_r extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(telefono_vet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(19, 19, 19)
+               .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(list_veterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(subir_vet)
-                    .addComponent(nuevo_vet)
+                    //.addComponent(nuevo_vet)
                     .addComponent(cerrar_vet))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -358,7 +369,7 @@ public class mascotas_r extends javax.swing.JFrame {
         os.mostrar("mascotas_r");
     }
     
-    private void subir_vet(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+    /*private void subir_vet(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
         // TODO add your handling code here:
         Statement st;
         conexion con = new conexion();
@@ -382,7 +393,7 @@ public class mascotas_r extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Registro exitoso");
         main os = new main();
         os.mostrar("mascotas_r");
-    }
+    }*/
     
     
     
@@ -431,7 +442,7 @@ public class mascotas_r extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> list_veterinario;
     private javax.swing.JLabel med;
     public javax.swing.JTextField nombre_m;
-    public javax.swing.JTextField nombre_vet;
+    public javax.swing.JComboBox<String> nombre_vet;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
     public javax.swing.JTextField telefono_vet;

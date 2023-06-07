@@ -78,19 +78,7 @@ public class dueños extends javax.swing.JFrame {
     	direccionText.setSize(150,30);
     	direccionText.setLocation(120,110);
     	ss.add(direccionText);
-    	
-    	JLabel fk_mascota = new JLabel("ID de Mascota ");
-    	fk_mascota.setSize(150,30);
-    	fk_mascota.setLocation(10,140);
-    	ss.add(fk_mascota);
-    	
-    	JTextField fk_mascotaText = new JTextField();
-    	fk_mascotaText.setSize(150,30);
-    	fk_mascotaText.setLocation(120,140);
-    	ss.add(fk_mascotaText);
-    	
-    	
-    	
+    
     	JLabel idDueno = new JLabel("ID del dueño a modificar:  ");
     	idDueno.setSize(250,30);
     	idDueno.setLocation(10,170);
@@ -128,10 +116,10 @@ public class dueños extends javax.swing.JFrame {
 					        String telefono= telefonoText.getText();
 					        
 					        try {
-						        int fkMascota = Integer.parseInt(fk_mascotaText.getText());
+						        
 
 						        String sql= "UPDATE dueño SET nombre_dueño = '"+nombreDueno+"', telefono = '"+telefono+"', direccion = '"+
-										direccion+"', fk_mascota = "+fkMascota+" WHERE id_dueño = "+id;
+										direccion+" WHERE id_dueño = "+id;
 								System.out.println(sql);
 								
 								st = conexion.createStatement();
@@ -167,10 +155,13 @@ public class dueños extends javax.swing.JFrame {
         label_na3 = new javax.swing.JLabel();
         lista_mascota = new javax.swing.JComboBox<>();
         link = new javax.swing.JLabel();
-        subir_dueño = new javax.swing.JButton();
-        nuevo_d = new javax.swing.JButton();
+        subir_dueño = new javax.swing.JButton();  
         cerrar_d = new javax.swing.JButton();
 
+        
+        label_na3.setVisible(false);
+        lista_mascota.setVisible(false);
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         nombre_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -204,11 +195,7 @@ public class dueños extends javax.swing.JFrame {
             }
         });
 
-        label_na3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        label_na3.setText("Mascota");
-
-        lista_mascota.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lista_mascota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número de mascota" }));
+  
 
         link.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         link.setText("Registro de dueños");
@@ -222,9 +209,6 @@ public class dueños extends javax.swing.JFrame {
             }
         });
 
-        nuevo_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nuevo_d.setText("Limpiar");
-
         cerrar_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_d.setText("Cerrar");
         cerrar_d.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +216,6 @@ public class dueños extends javax.swing.JFrame {
                 cerrar_dActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -268,8 +251,6 @@ public class dueños extends javax.swing.JFrame {
                                 .addGap(92, 92, 92)))
                         .addGap(77, 77, 77))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(nuevo_d)
-                        .addGap(31, 31, 31)
                         .addComponent(subir_dueño)
                         .addGap(30, 30, 30)
                         .addComponent(cerrar_d)
@@ -299,7 +280,6 @@ public class dueños extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(subir_dueño)
-                    .addComponent(nuevo_d)
                     .addComponent(cerrar_d))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -330,10 +310,10 @@ public class dueños extends javax.swing.JFrame {
         conexion con = new conexion();
         Connection conexion = con.conectar();
                 //select * from tipo where nombre_tipo = 'pupi'
-                mascotas_r m= new mascotas_r();
-                Object v = lista_mascota.getSelectedItem();
-                String sql = "insert into dueño(nombre_dueño,telefono,direccion,fk_mascota) values "
-                        + "('"+nombre_d.getText()+"','"+telefono_d.getText()+"','"+direccion_d.getText()+"','"+v+"')";
+        
+                
+                String sql = "insert into dueño(nombre_dueño,telefono,direccion,) values "
+                        + "('"+nombre_d.getText()+"','"+telefono_d.getText()+"','"+direccion_d.getText()+"')";
                 System.out.println(sql);
                 JOptionPane.showMessageDialog(null, "Registro exitoso");
                 System.out.println("consulta hecha");
