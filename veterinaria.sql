@@ -21,58 +21,54 @@ create table tipo
 (
 id_tipo int not null auto_increment,
 nombre_tipo varchar(30),
-precio double,
 primary key(id_tipo)
 );
-insert into tipo(nombre_tipo,precio) values("Antiparasitarios","120");
-insert into tipo(nombre_tipo,precio) values("Inyectables","500");
-insert into tipo(nombre_tipo,precio) values("Orales","300");
-insert into tipo(nombre_tipo,precio) values("Tópicos intraoculares","100");
-insert into tipo(nombre_tipo,precio) values("Antibióticos","900");
+insert into tipo(nombre_tipo) values("Antiparasitarios");
+insert into tipo(nombre_tipo) values("Inyectables");
+insert into tipo(nombre_tipo) values("Orales");
+insert into tipo(nombre_tipo) values("Tópicos intraoculares");
+insert into tipo(nombre_tipo) values("Antibióticos");
 
 create table medicinas
 (
 id_medicina int not null auto_increment,
-nombre_medicina varchar(30),
-fk_tipo int not null,
-primary key(id_medicina),
-constraint foreign key(fk_tipo) references tipo(id_tipo)
+nombre_medicina varchar(30) not null,
+nombre_tipo varchar(30) not null,
+precio double not null,
+primary key(id_medicina)
 );
-insert into medicinas (nombre_medicina,fk_tipo) values("Isoflurano 200g",1);
-insert into medicinas (nombre_medicina,fk_tipo) values("Desecante Gel 10g",2);
-insert into medicinas (nombre_medicina,fk_tipo) values("Adarfac 50g",3);
-insert into medicinas (nombre_medicina,fk_tipo) values("Ruinald Omega 60g",4);
-insert into medicinas (nombre_medicina,fk_tipo) values("Gotas 150g",5);
+insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Isoflurano 200g",'Antiparasitarios',120);
+insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Desecante Gel 10g",'Inyectables',500);
+insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Adarfac 50g",'Orales',300);
+insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Ruinald Omega 60g",'Tópicos intraoculares',100);
+insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Gotas 150g",'Antibioticos',900);
 
 create table mascotas(
 id int not null auto_increment,
 nombre varchar(30),
-fk_medicina int not null,
-fk_veterinario int not null,
-primary key(id),
-constraint foreign key(fk_medicina) references medicinas(id_medicina),
-constraint foreign key(fk_veterinario) references veterinario(id_v)
+nombre_medicina varchar(30) not null,
+nombre_vet varchar(30) not null,
+nombre_dueño varchar(30) not null,
+primary key(id)
 );
-insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Pupi',2,1);
-insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Perla',1,4);
-insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Baxter',3,5);
-insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Garfield',5,3);
-insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Pelos',4,2);
-insert into mascotas(nombre,fk_medicina,fk_veterinario)values('Conchito',1,6);
+insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Pupi','Gotas 150g','Yulissa Pérez','Maria Rodriguez');
+insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Perla','Ruinald Omega 60g','Wiliam López','Laura Salcido');
+insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Baxter','Isoflurano 200g','Jorge López','Maribel Guardia');
+insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Garfield','Desecante Gel 10g','Rousaura Tamara','Rubi Angelina');
+insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Pelos','Adarfac 50g','Carolina Briceño','Daniela Hernandez');
+insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Conchito','Gotas 150g','Carlos Palomo','Mario Bros');
 
 create table dueño (
   id_dueño int not null auto_increment,
   nombre_dueño varchar(30),
   telefono varchar(10),
   direccion varchar(50),
-  fk_mascota int not null,
-  primary key (id_dueño),
-  constraint foreign key (fk_mascota) references mascotas (id)
+  primary key (id_dueño)
 );
 
-insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('María', '0991238976', 'Calle 23 x 45 s/n', 1);
-insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Laura', '9491238976', 'colonia padre 34 c', 2);
-insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Maribel', '1991238976', 'calle 34 x 45', 3);
-insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Rubí', '9911238976', '34 x 5 ni 1', 4);
-insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Daniela', '9391238976', 'Calle 34 x 56 colonia', 5);
-insert into dueño (nombre_dueño, telefono, direccion, fk_mascota) values ('Mario', '9992238976', 'Calle 11 x 18 s/n', 6);
+insert into dueño (nombre_dueño, telefono, direccion) values ('María Rodriguez', '0991238976', 'Calle 23 x 45 s/n');
+insert into dueño (nombre_dueño, telefono, direccion) values ('Laura Salcido', '9491238976', 'colonia padre 34 c');
+insert into dueño (nombre_dueño, telefono, direccion) values ('Maribel Guardia', '1991238976', 'calle 34 x 45');
+insert into dueño (nombre_dueño, telefono, direccion) values ('Rubí Angelina', '9911238976', '34 x 5 ni 1');
+insert into dueño (nombre_dueño, telefono, direccion) values ('Daniela Hernandez', '9391238976', 'Calle 34 x 56 colonia');
+insert into dueño (nombre_dueño, telefono, direccion) values ('Mario Bros', '9992238976', 'Calle 11 x 18 s/n');
