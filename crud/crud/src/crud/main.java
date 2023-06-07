@@ -111,8 +111,8 @@ public class main extends javax.swing.JFrame  {
 
         tipo.setBackground(new java.awt.Color(255, 255, 255));
         tipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tipo.setIcon(new javax.swing.ImageIcon("donacion-de-sangre.png")); // NOI18N
-        tipo.setText("Tipos de medicamento");
+        tipo.setIcon(new javax.swing.ImageIcon("consultas.png")); // NOI18N
+        tipo.setText("Consultas");
         tipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tipo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tipo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -173,7 +173,7 @@ public class main extends javax.swing.JFrame  {
 
        
         insertar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        insertar.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\Iconos\\add.png")); // NOI18N
+        insertar.setIcon(new javax.swing.ImageIcon("firmar.png")); // NOI18N
         insertar.setText("Agregar");
         insertar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         insertar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -185,7 +185,7 @@ public class main extends javax.swing.JFrame  {
         });
 
         eliminar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        eliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\Iconos\\delete.png")); // NOI18N
+        eliminar.setIcon(new javax.swing.ImageIcon("eliminar.png")); // NOI18N
         eliminar.setText("Eliminar");
         eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -196,7 +196,7 @@ public class main extends javax.swing.JFrame  {
         });
 
         actualizar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        actualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\Iconos\\refresh.png")); // NOI18N
+        actualizar.setIcon(new javax.swing.ImageIcon("actualizar.png")); // NOI18N
         actualizar.setText("Modificar");
         actualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         actualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -207,7 +207,7 @@ public class main extends javax.swing.JFrame  {
         });
 
         recibo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        recibo.setIcon(new javax.swing.ImageIcon("C:\\Users\\52999\\Downloads\\cuenta.png")); // NOI18N
+        recibo.setIcon(new javax.swing.ImageIcon("recibir.png")); // NOI18N
         recibo.setText("Ticket");
         recibo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         recibo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -355,11 +355,11 @@ public class main extends javax.swing.JFrame  {
         model.addColumn("Nombre");
         model.addColumn("Teléfono");
         model.addColumn("Dirección");
-        model.addColumn("Mascota;");
+     
         
         visor.setModel(model);
         
-        String [] dato = new String [5];
+        String [] dato = new String [4];
         try{
             st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -368,7 +368,7 @@ public class main extends javax.swing.JFrame  {
                 dato[1]=rs.getString(2);
                 dato[2]=rs.getString(3);
                 dato[3]=rs.getString(4);
-                dato[4]=rs.getString(5);
+             
                 model.addRow(dato);
             }
         }catch(SQLException e)
@@ -382,10 +382,10 @@ public class main extends javax.swing.JFrame  {
         model.addColumn("Nombre");
         model.addColumn("Medicamento");
         model.addColumn("Veterinario");
-        
+        model.addColumn("Dueño");
         visor.setModel(model);
         
-        String [] datos = new String [4];
+        String [] datos = new String [5];
         try{
             st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -394,6 +394,7 @@ public class main extends javax.swing.JFrame  {
                 datos[1]=rs.getString(2);
                 datos[2]=rs.getString(3);
                 datos[3]=rs.getString(4);
+                datos[4]=rs.getString(5);
                 model.addRow(datos);
             }
         }catch(SQLException e)
@@ -406,9 +407,10 @@ public class main extends javax.swing.JFrame  {
                 model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Tipo");
+        model.addColumn("Precio");
         visor.setModel(model);
         
-        String [] med = new String [3];
+        String [] med = new String [4];
         try{
             st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -416,6 +418,7 @@ public class main extends javax.swing.JFrame  {
                 med[0]=rs.getString(1);
                 med[1]=rs.getString(2);
                 med[2]=rs.getString(3);
+                med[3]=rs.getString(4);
                 model.addRow(med);
             }
         }catch(SQLException e)
@@ -424,21 +427,26 @@ public class main extends javax.swing.JFrame  {
         }
                 break;
                 
-            case "tipo":
+            case "consultas":
                 model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Precio");
+        model.addColumn("Fecha");
+        model.addColumn("Hora");
+        model.addColumn("Mascota");
+        model.addColumn("Veterinario");
         visor.setModel(model);
         
-        String [] tipo = new String [3];
+        String [] consulta = new String [5];
         try{
             st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                tipo[0]=rs.getString(1);
-                tipo[1]=rs.getString(2);
-                tipo[2]=rs.getString(3);
-                model.addRow(tipo);
+                consulta[0]=rs.getString(1);
+                consulta[1]=rs.getString(2);
+                consulta[2]=rs.getString(3);
+                consulta[3]=rs.getString(4);
+                consulta[4]=rs.getString(5);
+               
+                model.addRow(consulta);
             }
         }catch(SQLException e)
         {
@@ -496,7 +504,7 @@ public class main extends javax.swing.JFrame  {
 
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
-        mostrar("tipo");
+        mostrar("consultas");
         presionado=5;
     }//GEN-LAST:event_tipoActionPerformed
 
@@ -516,7 +524,7 @@ public class main extends javax.swing.JFrame  {
         model.addColumn("Nombre");
         model.addColumn("Teléfono");
         model.addColumn("Dirección");
-        model.addColumn("Mascota;");
+  //      model.addColumn("Mascota;");
         
         visor.setModel(model);
         
@@ -529,7 +537,7 @@ public class main extends javax.swing.JFrame  {
                 dato[1]=rs.getString(2);
                 dato[2]=rs.getString(3);
                 dato[3]=rs.getString(4);
-                dato[4]=rs.getString(5);
+    //            dato[4]=rs.getString(5);
                 model.addRow(dato);
             }
         }catch(SQLException e)

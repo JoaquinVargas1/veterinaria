@@ -25,7 +25,7 @@ public class dueños extends javax.swing.JFrame {
     public dueños() {
         initComponents();
         conexion conecta= new conexion();
-        conecta.llenaCombo("mascotas", "id", lista_mascota);
+      //  conecta.llenaCombo("mascotas", "id", lista_mascota);
     }
 
     public void actualizarDatos() {
@@ -162,7 +162,7 @@ public class dueños extends javax.swing.JFrame {
         label_na3.setVisible(false);
         lista_mascota.setVisible(false);
         
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         nombre_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nombre_d.addActionListener(new java.awt.event.ActionListener() {
@@ -204,9 +204,17 @@ public class dueños extends javax.swing.JFrame {
         subir_dueño.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         subir_dueño.setText("Guardar");
         subir_dueño.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subir_dueñoActionPerformed(evt);
-            }
+           
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+               String tel = telefono_d.getText();
+        		int cant = tel.length();
+        		if(cant<=10) {
+        	
+        		subir_dueñoActionPerformed(evt);
+        		}else {
+        			JOptionPane.showMessageDialog(null, "Demasiados caracteres en numero el numero de telefono, revise el numero y vuelva a intertarlo", "ERROR", JOptionPane.WARNING_MESSAGE);
+        		}
+        		}
         });
 
         cerrar_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -312,14 +320,14 @@ public class dueños extends javax.swing.JFrame {
                 //select * from tipo where nombre_tipo = 'pupi'
         
                 
-                String sql = "insert into dueño(nombre_dueño,telefono,direccion,) values "
+                String sql = "insert into dueño(nombre_dueño,telefono,direccion) values "
                         + "('"+nombre_d.getText()+"','"+telefono_d.getText()+"','"+direccion_d.getText()+"')";
                 System.out.println(sql);
-                JOptionPane.showMessageDialog(null, "Registro exitoso");
-                System.out.println("consulta hecha");
+             //   System.out.println("consulta hecha");
         try{
             st = conexion.createStatement();
             st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
             
         }catch(SQLException e)
         {
@@ -328,17 +336,10 @@ public class dueños extends javax.swing.JFrame {
        // JOptionPane.showMessageDialog(null, "Borrado de la base de datos");
         main os = new main();
         os.mostrar("dueños");
-    }//GEN-LAST:event_subir_dueñoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    }
+    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -355,9 +356,7 @@ public class dueños extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(dueños.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new dueños().setVisible(true);
@@ -365,7 +364,7 @@ public class dueños extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+
     public javax.swing.JButton cerrar_d;
     public javax.swing.JTextField direccion_d;
     private javax.swing.JLabel label_na;
@@ -378,6 +377,6 @@ public class dueños extends javax.swing.JFrame {
     public javax.swing.JButton nuevo_d;
     public javax.swing.JButton subir_dueño;
     public javax.swing.JTextField telefono_d;
-    // End of variables declaration//GEN-END:variables
+  
 }
 

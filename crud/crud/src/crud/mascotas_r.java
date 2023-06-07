@@ -23,8 +23,10 @@ public class mascotas_r extends javax.swing.JFrame {
     public mascotas_r() {
         initComponents();
         conexion conecta=new conexion();
-        conecta.llenaCombo("medicinas", "id_medicina", list_med);
-        conecta.llenaCombo("veterinario", "id_v", list_veterinario);
+        conecta.llenaCombo("medicinas", "nombre_medicina", list_med);
+        conecta.llenaCombo("veterinario", "nombre_vet", list_veterinario);
+        conecta.llenaCombo("dueño", "nombre_dueño", list_dueño);
+    
     }
     
     public void actualizarDatos() {
@@ -159,7 +161,7 @@ public class mascotas_r extends javax.swing.JFrame {
         list_veterinario = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        nombre_vet = new javax.swing.JComboBox<>();
+        list_dueño = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         telefono_vet = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -169,7 +171,7 @@ public class mascotas_r extends javax.swing.JFrame {
 
         
         
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+   //     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Nombre");
@@ -205,8 +207,8 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Dueño");
         
-        nombre_vet.setFont(new java.awt.Font("Arial", 0, 12));
-        nombre_vet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dueño" }));
+        list_dueño.setFont(new java.awt.Font("Arial", 0, 12));
+        list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un dueño" }));
         
         telefono_vet.setVisible(false);
        
@@ -264,7 +266,7 @@ public class mascotas_r extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nombre_vet, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(list_dueño, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel4))
@@ -302,7 +304,7 @@ public class mascotas_r extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nombre_m, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombre_vet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(list_dueño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -333,12 +335,7 @@ public class mascotas_r extends javax.swing.JFrame {
     private void cerrar_vetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_vetActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_cerrar_vetActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
+    }
     
     
     
@@ -350,11 +347,12 @@ public class mascotas_r extends javax.swing.JFrame {
         conexion con = new conexion();
         Connection conexion = con.conectar();
                 //select * from tipo where nombre_tipo = 'pupi'
-                medicinas_r m= new medicinas_r();
+   //             medicinas_r m= new medicinas_r();
                 Object med = list_med.getSelectedItem();
                 Object vet =list_veterinario.getSelectedItem();
-                String sql = "insert into mascotas(nombre,fk_medicina,fk_veterinario) values "
-                        + "('"+nombre_m.getText()+"','"+med+"','"+vet +"')";
+                Object due =list_dueño.getSelectedItem();
+                String sql = "insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño) values "
+                        + "('"+nombre_m.getText()+"','"+med+"','"+vet +"','"+due+"')";
                 System.out.println(sql);
         try{
             st = conexion.createStatement();
@@ -399,11 +397,7 @@ public class mascotas_r extends javax.swing.JFrame {
     
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -442,7 +436,7 @@ public class mascotas_r extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> list_veterinario;
     private javax.swing.JLabel med;
     public javax.swing.JTextField nombre_m;
-    public javax.swing.JComboBox<String> nombre_vet;
+    public javax.swing.JComboBox<String> list_dueño;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
     public javax.swing.JTextField telefono_vet;

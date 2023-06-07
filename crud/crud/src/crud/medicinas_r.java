@@ -24,7 +24,7 @@ public class medicinas_r extends javax.swing.JFrame {
     public medicinas_r() {
         initComponents();
         conexion con = new conexion();
-        con.llenaCombo("tipo", "id_tipo", list_tipo);
+        con.llenaCombo("tipo", "nombre_tipo", list_tipo);
     }
     
     public void actualizarDatos() {
@@ -148,7 +148,7 @@ public class medicinas_r extends javax.swing.JFrame {
         nuevo = new javax.swing.JButton();
         cerrar_med = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      //  setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Nombre");
@@ -164,14 +164,7 @@ public class medicinas_r extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Medicamentos");
 
-       /* jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("Tipo");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel5.setText("Tipo de medicamento");
-
-        nombre_tipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-*/
+     
         nombre_tipo.setVisible(false);
         
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -192,16 +185,7 @@ public class medicinas_r extends javax.swing.JFrame {
         });
 
         nuevo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nuevo.addActionListener(new java.awt.event.ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				subir_tipo(e);
-			}
-        	
-        	
-        	
-        });
+       
 
         cerrar_med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_med.setText("Cerrar");
@@ -297,12 +281,7 @@ public class medicinas_r extends javax.swing.JFrame {
     private void cerrar_medActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_medActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_cerrar_medActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
+    }
     
     
     private void subir_medicamento(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
@@ -311,59 +290,31 @@ public class medicinas_r extends javax.swing.JFrame {
         conexion con = new conexion();
         Connection conexion = con.conectar();
                 //select * from tipo where nombre_tipo = 'pupi'
-                medicinas_r m= new medicinas_r();
+           //     medicinas_r m= new medicinas_r();
                 Object tm= list_tipo.getSelectedItem();
-                String sql = "insert into medicinas(nombre_medicina,fk_tipo) values "
-                        + "('"+nombre_med.getText()+"','"+tm+"')";
+                String sql = "insert into medicinas(nombre_medicina,nombre_tipo,precio) values "
+                        + "('"+nombre_med.getText()+"','"+tm+"','"+precio_tipo.getText()+"')";
                 System.out.println(sql);
         try{
             st = conexion.createStatement();
             st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
             
         }catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, "Error " +e.toString());
         }
-        JOptionPane.showMessageDialog(null, "Registro exitoso");
         main os = new main();
         os.mostrar("medicinar_r");
     }
     
-    private void subir_tipo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
-        // TODO add your handling code here:
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
-                //select * from tipo where nombre_tipo = 'pupi'
-                
-                
-                String sql = "insert into tipo(precio) values "
-                        +  "('"+"','"+precio_tipo.getText()+"')";
-                
-                System.out.println(sql);
-        try{
-            st = conexion.createStatement();
-            st.executeUpdate(sql);
-            
-        }catch(SQLException e)
-        {
-            JOptionPane.showMessageDialog(null, "Error " +e.toString());
-            System.out.println(e.toString());
-        }
-        JOptionPane.showMessageDialog(null, "Registro exitoso");
-        main os = new main();
-        os.mostrar("medicinas_r");
-    }
+   
     
     
     
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
