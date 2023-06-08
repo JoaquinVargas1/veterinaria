@@ -72,3 +72,20 @@ insert into dueño (nombre_dueño, telefono, direccion) values ('Maribel Guardia
 insert into dueño (nombre_dueño, telefono, direccion) values ('Rubí Angelina', '9911238976', '34 x 5 ni 1');
 insert into dueño (nombre_dueño, telefono, direccion) values ('Daniela Hernandez', '9391238976', 'Calle 34 x 56 colonia');
 insert into dueño (nombre_dueño, telefono, direccion) values ('Mario Bros', '9992238976', 'Calle 11 x 18 s/n');
+
+CREATE TABLE consultas (
+  id_consulta INT NOT NULL AUTO_INCREMENT,
+  fecha DATE NOT NULL,
+  hora TIME NOT NULL,
+  mascota VARCHAR(30) NOT NULL,
+  veterinario VARCHAR(30) NOT NULL,
+  PRIMARY KEY (id_consulta)
+);
+
+
+INSERT INTO consultas (fecha, hora, mascota, veterinario)
+VALUES ('2023-06-05', '10:00:00', 'Pupi', 'Yulissa Pérez');
+
+INSERT INTO consultas (fecha, hora, mascota, veterinario)
+VALUES ('2023-06-06', '15:30:00', 'Perla', 'Wiliam López');
+
