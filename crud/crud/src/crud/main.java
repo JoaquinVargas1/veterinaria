@@ -1067,6 +1067,11 @@ public class main extends javax.swing.JFrame  {
                 medicinas_r medicina = new medicinas_r();
                 medicina.setVisible(true);
                 break;
+                
+            case 4:
+                Veterinarios veterinario = new Veterinarios();
+                veterinario.setVisible(true);
+                break;
         }
     }//GEN-LAST:event_insertarActionPerformed
 
