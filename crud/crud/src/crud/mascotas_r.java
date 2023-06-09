@@ -262,7 +262,7 @@ public class mascotas_r extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+    	jLabel1 = new javax.swing.JLabel();
         nombre_m = new javax.swing.JTextField();
         med = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -272,8 +272,10 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         list_dueño = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        telefono_vet = new javax.swing.JTextField();
+        comboboxx = new javax.swing.JComboBox<>();
+        comboboxx2 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         subir_vet = new javax.swing.JButton();
         nuevo_vet = new javax.swing.JButton();
         cerrar_vet = new javax.swing.JButton();
@@ -301,25 +303,24 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel2.setText("Registro Mascotas");
 
         
-       /* jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("Veterinarios");
 
-        nombre_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
+        ///aqui esta un combo box dieguita la jotita///////////////////////////////
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel6.setText("Telefono");
-
-        telefono_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
+        jLabel6.setText("Comboboxss");
+        comboboxx.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         
-*/
+        ///aqui esta un combo box dieguita la jotita/////////////////////////////
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("Comboboxss2");
+        comboboxx2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Dueño");
         
         list_dueño.setFont(new java.awt.Font("Arial", 0, 12));
         list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un dueño" }));
         
-        telefono_vet.setVisible(false);
+       /////////////////////////////////////////////////////////////////////////////
        
         
         subir_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -372,14 +373,16 @@ public class mascotas_r extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                        .addComponent(jLabel7))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(list_dueño, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel4))
-                            .addComponent(telefono_vet))))
+                            .addComponent(comboboxx)
+                .addComponent(comboboxx2))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
@@ -425,8 +428,17 @@ public class mascotas_r extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(telefono_vet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-               .addGap(19, 19, 19)
+                            .addComponent(comboboxx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                       
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                		.addComponent(jLabel7)
+                                .addComponent(comboboxx2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                )))
+                          
+
+                .addGap(19, 19, 19))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(list_veterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -541,6 +553,7 @@ public class mascotas_r extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     public javax.swing.JComboBox<String> list_med;
     public javax.swing.JComboBox<String> list_veterinario;
     private javax.swing.JLabel med;
@@ -548,7 +561,7 @@ public class mascotas_r extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> list_dueño;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
-    public javax.swing.JTextField telefono_vet;
+    public javax.swing.JComboBox<String> comboboxx;
+    public javax.swing.JComboBox<String> comboboxx2;
     // End of variables declaration//GEN-END:variables
 }
-

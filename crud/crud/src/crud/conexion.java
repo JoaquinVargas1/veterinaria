@@ -16,8 +16,8 @@ public class conexion {
     private static final String driver="com.mysql.jdbc.Driver";
     private static final String user="root";
     private static final String pass="Rootjcsg2003"; //aqui poner su contraseña de sql para que se pueda conectar
-    private static final String url="jdbc:mysql://localhost:3306/veterinaria?characterEncoding=utf8";
-    //private static final String url = "jdbc:mysql://localhost:3306/veterinaria?characterEncoding=utf8&useSSL=false";
+    //private static final String url="jdbc:mysql://localhost:3306/veterinaria?characterEncoding=utf8";
+    private static final String url = "jdbc:mysql://localhost:3306/veterinaria?characterEncoding=utf8&useSSL=false";
     // Funcion que va conectarse a mi bd de mysql
     public Connection conectar(){
       con = null;
