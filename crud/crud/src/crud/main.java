@@ -427,8 +427,7 @@ public class main extends javax.swing.JFrame  {
                 datos[2]=rs.getString(3);
                 datos[3]=rs.getString(4);
                 datos[4]=rs.getString(5);
-                datos[5]=rs.getString(6);
-                datos[6]=rs.getString(7);
+               
 
                 
                 model.addRow(datos);
