@@ -1,5 +1,6 @@
 create database veterinaria;
 use veterinaria;
+
 create table veterinario
 (
 id_v int not null auto_increment,
@@ -32,9 +33,10 @@ insert into tipo(nombre_tipo) values("Antibióticos");
 create table medicinas
 (
 id_medicina int not null auto_increment,
-nombre_medicina varchar(30) not null,
 nombre_tipo varchar(30) not null,
 precio double not null,
+nombre_medicina varchar(30) not null,
+
 primary key(id_medicina)
 );
 insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Isoflurano 200g",'Antiparasitarios',120);
@@ -46,17 +48,21 @@ insert into medicinas (nombre_medicina,nombre_tipo,precio) values("Gotas 150g",'
 create table mascotas(
 id int not null auto_increment,
 nombre varchar(30),
-nombre_medicina varchar(30) not null,
 nombre_vet varchar(30) not null,
 nombre_dueño varchar(30) not null,
+medicina_1  varchar(30) not null,
+medicina_2  varchar(30),
+medicina_3  varchar(30),
+
+
 primary key(id)
 );
-insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Pupi','Gotas 150g','Yulissa Pérez','Maria Rodriguez');
-insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Perla','Ruinald Omega 60g','Wiliam López','Laura Salcido');
-insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Baxter','Isoflurano 200g','Jorge López','Maribel Guardia');
-insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Garfield','Desecante Gel 10g','Rousaura Tamara','Rubi Angelina');
-insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Pelos','Adarfac 50g','Carolina Briceño','Daniela Hernandez');
-insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño)values('Conchito','Gotas 150g','Carlos Palomo','Mario Bros');
+insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño)values('Pupi','Gotas 150g','Yulissa Pérez','Maria Rodriguez');
+insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño)values('Perla','Ruinald Omega 60g','Wiliam López','Laura Salcido');
+insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño)values('Baxter','Isoflurano 200g','Jorge López','Maribel Guardia');
+insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño)values('Garfield','Desecante Gel 10g','Rousaura Tamara','Rubi Angelina');
+insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño)values('Pelos','Adarfac 50g','Carolina Briceño','Daniela Hernandez');
+insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño)values('Conchito','Gotas 150g','Carlos Palomo','Mario Bros');
 
 create table dueño (
   id_dueño int not null auto_increment,
@@ -79,13 +85,15 @@ CREATE TABLE consultas (
   hora TIME NOT NULL,
   mascota VARCHAR(30) NOT NULL,
   veterinario VARCHAR(30) NOT NULL,
+  medicina_1  varchar(30) not null,
+  medicina_2  varchar(30),
+  medicina_3  varchar(30),
   PRIMARY KEY (id_consulta)
 );
 
 
-INSERT INTO consultas (fecha, hora, mascota, veterinario)
-VALUES ('2023-06-05', '10:00:00', 'Pupi', 'Yulissa Pérez');
+INSERT INTO consultas (fecha, hora, mascota, veterinario,medicina_1)
+VALUES ('2023-06-05', '10:00:00', 'Pupi', 'Yulissa Pérez','inyeccion letal');
 
-INSERT INTO consultas (fecha, hora, mascota, veterinario)
-VALUES ('2023-06-06', '15:30:00', 'Perla', 'Wiliam López');
-
+INSERT INTO consultas (fecha, hora, mascota, veterinario,medicina_1)
+VALUES ('2023-06-06', '15:30:00', 'Perla', 'Wiliam López','inyeccion letal');
