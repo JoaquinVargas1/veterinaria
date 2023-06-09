@@ -19,15 +19,19 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class dueños extends javax.swing.JFrame {
-    /**
-     * Creates new form dueños
-     */
+	JTextField newNombreDueno = new JTextField();
+	JTextField telefonoText = new JTextField();
+	JTextField direccionText = new JTextField();
+	JTextField idDuenoBuscar = new JTextField();
+
+
     public dueños() {
         initComponents();
         conexion conecta= new conexion();
       //  conecta.llenaCombo("mascotas", "id", lista_mascota);
     }
 
+    
     public void actualizarDatos() {
     		JFrame f= new JFrame();
     	f.setLayout(null);
@@ -46,96 +50,146 @@ public class dueños extends javax.swing.JFrame {
 
     	ss.add(actualizarDatos);
     	
+    	
+    	JLabel idDueno = new JLabel("ID del dueño a modificar:  ");
+    	idDueno.setSize(250,30);
+    	idDueno.setLocation(10,50);
+    	ss.add(idDueno);
+    	
+    	
+    	idDuenoBuscar.setSize(150,30);
+    	idDuenoBuscar.setLocation(150,50);
+    	ss.add(idDuenoBuscar);
+    	
     	JLabel nombreDueno = new JLabel("Nombre de Dueño: ");
+
     	nombreDueno.setSize(140,30);
-    	nombreDueno.setLocation(10,50);
+    	nombreDueno.setLocation(10,110);
     	ss.add(nombreDueno);
     	
     	
-    	JTextField newNombreDueno = new JTextField();
+    	
     	newNombreDueno.setSize(150,30);
-    	newNombreDueno.setLocation(120,50);
+    	newNombreDueno.setLocation(120,110);
     	ss.add(newNombreDueno);
     	
     	JLabel telefonoLabel = new JLabel("Telefono: ");
     	telefonoLabel.setSize(150,30);
-    	telefonoLabel.setLocation(10,80);
+    	telefonoLabel.setLocation(10,150);
     	ss.add(telefonoLabel);
     	
-    	JTextField telefonoText = new JTextField();
     	telefonoText.setSize(150,30);
-    	telefonoText.setLocation(120,80);
+    	telefonoText.setLocation(120,150);
     	ss.add(telefonoText);
     	
 
     	JLabel direccionLabel = new JLabel("Direccion: ");
     	direccionLabel.setSize(150,30);
-    	direccionLabel.setLocation(10,110);
+    	direccionLabel.setLocation(10,200);
     	ss.add(direccionLabel);
     	
     	
-    	JTextField direccionText = new JTextField();
     	direccionText.setSize(150,30);
-    	direccionText.setLocation(120,110);
+    	direccionText.setLocation(120,200);
     	ss.add(direccionText);
     
-    	JLabel idDueno = new JLabel("ID del dueño a modificar:  ");
-    	idDueno.setSize(250,30);
-    	idDueno.setLocation(10,170);
-    	ss.add(idDueno);
     	
     	
-    	JTextField idDuenoBuscar = new JTextField();
-    	idDuenoBuscar.setSize(150,30);
-    	idDuenoBuscar.setLocation(170,170);
-    	ss.add(idDuenoBuscar);
-    	
-    	
+
+    	JButton btnBuscar = new JButton("buscar");
+    	btnBuscar.setLocation(150,80);
+    	btnBuscar.setSize(100,30);
+    	btnBuscar.setVisible(true);
+    	ss.add(btnBuscar);
+    
+    	btnBuscar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			
+					ponerDatos(idDuenoBuscar.getText());
+				
+			}
+    		
+    	});
     	
     	JButton s = new JButton("Actualizar");
-    	s.setLocation(180,240);
+    	s.setLocation(180,260);
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
     	f.add(ss);
+    	
     	
     	s.addActionListener(new ActionListener() {
     		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				Statement st;
+		        conexion con = new conexion();
+		        Connection conexion = con.conectar();
 		        
-
-						 Statement st;
-					        conexion con = new conexion();
-					        Connection conexion = con.conectar();
-					             
-					        String nombreDueno = newNombreDueno.getText();  
-					        String id= idDuenoBuscar.getText();
-					        String direccion = direccionText.getText();
-					        String telefono= telefonoText.getText();
-					        
-					        try {
+						
+						
 						        
+						        try {
+							        
 
-						        String sql= "UPDATE dueño SET nombre_dueño = '"+nombreDueno+"', telefono = '"+telefono+"', direccion = '"+
-										direccion+" WHERE id_dueño = "+id;
-								System.out.println(sql);
-								
-								st = conexion.createStatement();
-					            st.executeUpdate(sql);
-					            
-					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+							        String sql= "UPDATE dueño SET nombre_dueño = '"+newNombreDueno.getText()+"', telefono = '"+telefonoText.getText()+"', direccion = '"+
+							        		direccionText.getText()+"' WHERE id_dueño = "+idDuenoBuscar.getText();
+									System.out.println(sql);
+									
+									st = conexion.createStatement();
+						            st.executeUpdate(sql);
+						            
+						        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
 
-					        }catch(Exception e1) {
-					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de mascota de tipo entero (INT) al igual que en ID ó que existan ");
-					        }
-					        
-					        
-					        
-							
-					        
+						        }catch(Exception e1) {
+						        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de mascota de tipo entero (INT) al igual que en ID ó que existan ");
+						        }
+						
+						 
+        
 			}});
+    }
+    
+    public void ponerDatos(Object id) {
+    	
+    	
+    	Statement st = null;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+        
+		  try{
+			  
+
+         	 String sql= "SELECT id_dueño,nombre_dueño,telefono,direccion FROM dueño WHERE id_dueño="+id;
+			//	System.out.println(sql);
+				
+	            st = conexion.createStatement();
+	            ResultSet rs = st.executeQuery(sql);
+	  
+	            while(rs.next()){
+		           
+	       
+	            	idDuenoBuscar.setText(rs.getString(1));
+	 	            newNombreDueno.setText(rs.getString(2));
+	 	            telefonoText.setText(rs.getString(3));
+	 	           direccionText.setText(rs.getString(4));
+
+	 	  
+	            	
+	            }
+	        }catch(SQLException e)
+	        {
+	        	JOptionPane.showMessageDialog(null, "ID no Valido, por favor ingresa uno valido");
+
+	          e.printStackTrace();
+	        }
+   
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -323,7 +377,7 @@ public class dueños extends javax.swing.JFrame {
                 String sql = "insert into dueño(nombre_dueño,telefono,direccion) values "
                         + "('"+nombre_d.getText()+"','"+telefono_d.getText()+"','"+direccion_d.getText()+"')";
                 System.out.println(sql);
-             //   System.out.println("consulta hecha");
+               // System.out.println("consulta hecha");
         try{
             st = conexion.createStatement();
             st.executeUpdate(sql);
