@@ -6,6 +6,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.BufferedWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,16 +25,32 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-           
+import javax.swing.ListSelectionModel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.JTable;
+
+
+       
 public class main extends javax.swing.JFrame  {
     //Variable para controlar los forms //Es global
     public int presionado=0;
+    //Objeto del formulario dueños
+    public dueños ob= new dueños();
+    mascotas_r mascota = new mascotas_r();
+    medicinas_r medicinas = new medicinas_r();
+
     public main() {
        initComponents();
        conexion os = new conexion();
@@ -342,14 +364,17 @@ public class main extends javax.swing.JFrame  {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    int selectedRow = 0;
+	int selectedColumn=0;
     public void mostrar(String tabla){
         String sql = "select * from " +tabla;
         Statement st;
         conexion con = new conexion();
         Connection conexion = con.conectar();
-        
+
         DefaultTableModel model = new DefaultTableModel();
         switch(tabla){
+        
             case "dueño":
         model.addColumn("ID");
         model.addColumn("Nombre");
@@ -370,22 +395,29 @@ public class main extends javax.swing.JFrame  {
                 dato[3]=rs.getString(4);
              
                 model.addRow(dato);
+           
+                       
             }
         }catch(SQLException e)
         {
             e.printStackTrace();
         }
-                break;
+        
+     
+        
+               break;
                 
             case "mascotas":
                 model.addColumn("ID");
         model.addColumn("Nombre");
-        model.addColumn("Medicamento");
         model.addColumn("Veterinario");
         model.addColumn("Dueño");
+        model.addColumn("Medicamento 1");
+        model.addColumn("Medicamento 2");
+        model.addColumn("Medicamento 3");
         visor.setModel(model);
         
-        String [] datos = new String [5];
+        String [] datos = new String [7];
         try{
             st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -395,6 +427,10 @@ public class main extends javax.swing.JFrame  {
                 datos[2]=rs.getString(3);
                 datos[3]=rs.getString(4);
                 datos[4]=rs.getString(5);
+                datos[5]=rs.getString(6);
+                datos[6]=rs.getString(7);
+
+                
                 model.addRow(datos);
             }
         }catch(SQLException e)
@@ -405,9 +441,10 @@ public class main extends javax.swing.JFrame  {
                 
             case "medicinas":
                 model.addColumn("ID");
-        model.addColumn("Nombre");
         model.addColumn("Tipo");
         model.addColumn("Precio");
+        model.addColumn("Nombre");
+
         visor.setModel(model);
         
         String [] med = new String [4];
@@ -433,9 +470,13 @@ public class main extends javax.swing.JFrame  {
         model.addColumn("Hora");
         model.addColumn("Mascota");
         model.addColumn("Veterinario");
+        model.addColumn("Medicina 1");
+        model.addColumn("Medicina 2");
+        model.addColumn("Medicina 3");
+
         visor.setModel(model);
         
-        String [] consulta = new String [5];
+        String [] consulta = new String [8];
         try{
             st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -445,6 +486,10 @@ public class main extends javax.swing.JFrame  {
                 consulta[2]=rs.getString(3);
                 consulta[3]=rs.getString(4);
                 consulta[4]=rs.getString(5);
+                consulta[5]=rs.getString(6);
+                consulta[6]=rs.getString(7);
+                consulta[7]=rs.getString(8);
+
                
                 model.addRow(consulta);
             }
@@ -475,6 +520,57 @@ public class main extends javax.swing.JFrame  {
         }
                 break;
         }
+        
+       
+        
+        visor.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int fila = visor.getSelectedRow();
+                    
+                    switch(tabla) {
+                    case "dueño":
+                    	if(fila>=0 ) {
+                        	ob.ponerDatos(visor.getValueAt(fila,0));
+
+                    	}
+                    	
+                    	
+                    break;
+                    
+                    case "veterinario":
+                    	if(fila>=0 ) {
+                        	ponerDatosVeterinario(visor.getValueAt(fila,0));
+
+                    	}
+                    break;
+                    case "mascotas":
+                    	if(fila>=0 ) {
+                        	mascota.ponerDatos(visor.getValueAt(fila,0));
+
+                    	}
+                    break;
+                    
+                    case "medicinas":
+                    	if(fila>=0 ) {
+                        	medicinas.ponerDatos(visor.getValueAt(fila,0));
+
+                    	}
+                    	
+                    break;
+                    case "consultas":
+                    	if(fila>=0 ) {
+                        	ponerDatosConsulta(visor.getValueAt(fila,0));
+
+                    	}
+                    break;
+                    }
+                }
+            }
+        });
+
+       
         
     }
     private void dueñosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueñosActionPerformed
@@ -826,21 +922,22 @@ public class main extends javax.swing.JFrame  {
     
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reciboActionPerformed
         // TODO add your handling code here:
+    	
+    	
     	switch(presionado){
         case 1:
-            //Objeto del formulario dueños
-            dueños ob= new dueños();
+        	
+     
             ob.actualizarDatos();
             //ob.setVisible(true);
             break;
         case 2:
-            mascotas_r mascota = new mascotas_r();
+           
             mascota.actualizarDatos();
            // mascota.setVisible(true);
             break;
         case 3:
-            medicinas_r medicina = new medicinas_r();
-            medicina.actualizarDatos();
+            medicinas.actualizarDatos();
             //medicina.setVisible(true);
            
             break;
@@ -848,13 +945,52 @@ public class main extends javax.swing.JFrame  {
         	actualizarDatosTablaVeterinarios();
         break;
         case 5:
-        	actualizarDatosTablaTipos();
+        	actualizarDatosTablaConsulta();
         break;
     }
     	
   
     }//GEN-LAST:event_reciboActionPerformed
 
+	JTextField newNombreVText = new JTextField();
+	JTextField telefonoText = new JTextField();
+	JTextField idVBuscar = new JTextField();
+
+
+    public void ponerDatosVeterinario(Object id) {
+    	
+    	
+    	Statement st = null;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+        
+		  try{
+			  
+
+         	 String sql= "SELECT id_v,nombre_vet,telefono FROM veterinario WHERE id_v="+id;
+			//	System.out.println(sql);
+				
+	            st = conexion.createStatement();
+	            ResultSet rs = st.executeQuery(sql);
+	  
+	            while(rs.next()){
+		           
+	       
+	            	idVBuscar.setText(rs.getString(1));
+	            	newNombreVText.setText(rs.getString(2));
+	 	            telefonoText.setText(rs.getString(3));
+
+	 	  
+	            	
+	            }
+	        }catch(SQLException e)
+	        {
+	        	JOptionPane.showMessageDialog(null, "ID no Valido, por favor ingresa uno valido");
+
+	           // e.printStackTrace();
+	        }
+   
+    }
     public void actualizarDatosTablaVeterinarios() {
       	JFrame f= new JFrame();
     	f.setLayout(null);
@@ -872,46 +1008,63 @@ public class main extends javax.swing.JFrame  {
     	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
     	ss.add(actualizarDatos);
     	
+    	
+    	JLabel idV = new JLabel("ID del Veterinario a Modificar: ");
+    	idV.setSize(500,30);
+    	idV.setLocation(10,50);
+    	ss.add(idV);
+    	
+    	
+    	idVBuscar.setSize(150,30);
+    	idVBuscar.setLocation(180,50);
+    	ss.add(idVBuscar);
+    	
+    	JButton btnBuscar = new JButton("buscar");
+    	btnBuscar.setLocation(180,80);
+    	btnBuscar.setSize(100,30);
+    	btnBuscar.setVisible(true);
+    	ss.add(btnBuscar);
+    
+    	btnBuscar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			
+					ponerDatosVeterinario(idVBuscar.getText());
+				
+			}
+    		
+    	});
+    	
     	JLabel nombreV = new JLabel("Nombre de Veterinario: ");
     	nombreV.setSize(150,30);
-    	nombreV.setLocation(10,50);
+    	nombreV.setLocation(10,120);
     	ss.add(nombreV);
     	
     	
-    	JTextField newNombreVText = new JTextField();
     	newNombreVText.setSize(150,30);
-    	newNombreVText.setLocation(140,50);
+    	newNombreVText.setLocation(140,120);
     	ss.add(newNombreVText);
     	
     	JLabel telefonoLabel = new JLabel("Telefono: ");
     	telefonoLabel.setSize(150,30);
-    	telefonoLabel.setLocation(10,80);
+    	telefonoLabel.setLocation(10,160);
     	ss.add(telefonoLabel);
     	
-    	JTextField telefonoText = new JTextField();
     	telefonoText.setSize(150,30);
-    	telefonoText.setLocation(120,80);
+    	telefonoText.setLocation(120,160);
     	ss.add(telefonoText);
     	
     	
     	
-    	JLabel idV = new JLabel("ID del Veterinario a Modificar: ");
-    	idV.setSize(500,30);
-    	idV.setLocation(10,170);
-    	ss.add(idV);
-    	
-    	
-    	JTextField idVBuscar = new JTextField();
-    	idVBuscar.setSize(150,30);
-    	idVBuscar.setLocation(180,170);
-    	ss.add(idVBuscar);
     	
     	
     	
     	
     	
     	JButton s = new JButton("Actualizar");
-    	s.setLocation(180,240);
+    	s.setLocation(180,200);
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
@@ -933,7 +1086,7 @@ public class main extends javax.swing.JFrame  {
 					        
 					        try {
 					        	int id= Integer.parseInt(idVBuscar.getText());
-						        int telefono= Integer.parseInt(telefonoText.getText());
+						        String telefono= telefonoText.getText();
 
 								String sql= "UPDATE veterinario SET nombre_vet = '"+nombreV+"', telefono = '"+telefono+"' WHERE id_v = "+id;
 								System.out.println(sql);
@@ -943,14 +1096,64 @@ public class main extends javax.swing.JFrame  {
 					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
 
 					        }catch(Exception e1){
-					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID valido o un Telefono Valido ");
+						          //e1.printStackTrace();
 
+					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID valido o un Telefono Valido sin exceder limite de digitos ");
+					        	
 					        }
 					        
 					      
 			}});
     }
-    public void actualizarDatosTablaTipos() {
+    
+	JTextField idConsulta = new JTextField();
+    JTextField fechaText = new JTextField();
+	JTextField horaText = new JTextField();
+	JTextField mascotaText = new JTextField();
+	JTextField veterinarioText = new JTextField();
+	JTextField medicina1Text = new JTextField();
+	JTextField medicina2Text = new JTextField();
+	JTextField medicina3Text = new JTextField();
+
+    
+    public void ponerDatosConsulta(Object id) {
+    	Statement st = null;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+        
+		  try{
+			  
+
+         	 String sql= "SELECT id_consulta,fecha,hora,mascota,veterinario,medicina_1,medicina_2,medicina_3 FROM consultas WHERE id_consulta="+id;
+			System.out.println(sql);
+				
+	            st = conexion.createStatement();
+	            ResultSet rs = st.executeQuery(sql);
+	  
+	            while(rs.next()){
+		           
+	       
+	            	idConsulta.setText(rs.getString(1));
+	            	fechaText.setText(rs.getString(2));
+	            	horaText.setText(rs.getString(3));
+	            	mascotaText.setText(rs.getString(4));
+	            	veterinarioText.setText(rs.getString(5));
+	            	medicina1Text.setText(rs.getString(6));
+	            	medicina2Text.setText(rs.getString(7));
+	            	medicina3Text.setText(rs.getString(8));
+	            	
+	            }
+	        }catch(SQLException e)
+	        {
+	        	JOptionPane.showMessageDialog(null, "ID no Valido, por favor ingresa uno valido");
+
+	           // e.printStackTrace();
+	        }
+   
+    }
+    
+    
+    public void actualizarDatosTablaConsulta() {
       	JFrame f= new JFrame();
     	f.setLayout(null);
     	f.setSize(500,600);
@@ -961,49 +1164,107 @@ public class main extends javax.swing.JFrame  {
     	ss.setLocation(0,0);
     	ss.setLayout(null);
     	
-    	JLabel actualizarDatos = new JLabel("Actualizar Datos de Tipos ");
+    	JLabel actualizarDatos = new JLabel("Actualizar Datos de Consultas ");
     	actualizarDatos.setSize(700,30);
-    	actualizarDatos.setLocation(40,5);
-    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
+    	actualizarDatos.setLocation(20,5);
+    	actualizarDatos.setFont(new Font("Arial",Font.BOLD,17));
     	ss.add(actualizarDatos);
     	
-    	JLabel nombreTipo = new JLabel("Nombre Tipo: ");
-    	nombreTipo.setSize(150,30);
-    	nombreTipo.setLocation(10,50);
-    	ss.add(nombreTipo);
+    	JLabel labelIdConsulta = new JLabel("ID de Consulta a Modificar: ");
+    	labelIdConsulta.setSize(500,30);
+    	labelIdConsulta.setLocation(20,50);
+    	ss.add(labelIdConsulta);
     	
     	
-    	JTextField newNombreTipoText = new JTextField();
-    	newNombreTipoText.setSize(150,30);
-    	newNombreTipoText.setLocation(120,50);
-    	ss.add(newNombreTipoText);
+    	idConsulta.setSize(100,30);
+    	idConsulta.setLocation(180,50);
+    	ss.add(idConsulta);
     	
-    	JLabel precioLabel = new JLabel("Precio: ");
-    	precioLabel.setSize(150,30);
-    	precioLabel.setLocation(10,80);
-    	ss.add(precioLabel);
-    	
-    	JTextField precioText = new JTextField();
-    	precioText.setSize(150,30);
-    	precioText.setLocation(120,80);
-    	ss.add(precioText);
-    	
-    	
-    	JLabel idPrecioBuscarLabel = new JLabel("ID del Tipo a Modificar: ");
-    	idPrecioBuscarLabel.setSize(500,30);
-    	idPrecioBuscarLabel.setLocation(50,170);
-    	ss.add(idPrecioBuscarLabel);
-    	
-    	
-    	JTextField idPrecioBuscar = new JTextField();
-    	idPrecioBuscar.setSize(150,30);
-    	idPrecioBuscar.setLocation(180,170);
-    	ss.add(idPrecioBuscar);
+    	JButton btnBuscar = new JButton("buscar");
+    	btnBuscar.setLocation(150,80);
+    	btnBuscar.setSize(100,30);
+    	btnBuscar.setVisible(true);
+    	ss.add(btnBuscar);
+    
+    	btnBuscar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			
+					ponerDatosConsulta(idConsulta.getText());
+				
+			}
+    		
+    	});
     	
     	
+    	JLabel labelFecha = new JLabel("Fecha:  ");
+    	labelFecha.setSize(150,30);
+    	labelFecha.setLocation(10,120);
+    	ss.add(labelFecha);
+    	
+    	
+    	fechaText.setSize(150,30);
+    	fechaText.setLocation(120,120);
+    	ss.add(fechaText);
+    	
+    	JLabel horaLabel = new JLabel("Hora: ");
+    	horaLabel.setSize(150,30);
+    	horaLabel.setLocation(10,160);
+    	ss.add(horaLabel);
+    	
+    	horaText.setSize(150,30);
+    	horaText.setLocation(120,160);
+    	ss.add(horaText);
+    	
+    	JLabel mascotaLabel = new JLabel("Mascota: ");
+    	mascotaLabel.setSize(150,30);
+    	mascotaLabel.setLocation(10,190);
+    	ss.add(mascotaLabel);
+    	
+    	mascotaText.setSize(150,30);
+    	mascotaText.setLocation(120,190);
+    	ss.add(mascotaText);
+    	
+    	JLabel veterinarioLabel = new JLabel("Veterinario: ");
+    	veterinarioLabel.setSize(150,30);
+    	veterinarioLabel.setLocation(10,220);
+    	ss.add(veterinarioLabel);
+    	
+    	veterinarioText.setSize(150,30);
+    	veterinarioText.setLocation(120,220);
+    	ss.add(veterinarioText);
+    	
+    	JLabel medicina1Label = new JLabel("medicina 1: ");
+    	medicina1Label.setSize(150,30);
+    	medicina1Label.setLocation(10,250);
+    	ss.add(medicina1Label);
+    	
+    	medicina1Text.setSize(150,30);
+    	medicina1Text.setLocation(120,250);
+    	ss.add(medicina1Text);
+    	
+    	JLabel medicina2Label = new JLabel("medicina 2: ");
+    	medicina2Label.setSize(150,30);
+    	medicina2Label.setLocation(10,280);
+    	ss.add(medicina2Label);
+    	
+    	medicina2Text.setSize(150,30);
+    	medicina2Text.setLocation(120,280);
+    	ss.add(medicina2Text);
+    	
+    	JLabel medicina3Label = new JLabel("medicina 3: ");
+    	medicina3Label.setSize(150,30);
+    	medicina3Label.setLocation(10,320);
+    	ss.add(medicina3Label);
+    	
+    	medicina3Text.setSize(150,30);
+    	medicina3Text.setLocation(120,320);
+    	ss.add(medicina3Text);
     	
     	JButton s = new JButton("Actualizar");
-    	s.setLocation(180,240);
+    	s.setLocation(180,350);
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
@@ -1024,18 +1285,21 @@ public class main extends javax.swing.JFrame  {
 					        try {
 					        	
 						       
-					        	 String nombreTipo = newNombreTipoText.getText();
-							     
-							        double precio=  Double.parseDouble(precioText.getText());
-							        int id=  Integer.parseInt(idPrecioBuscar.getText());
-							        
-					        	String sql= "UPDATE tipo SET nombre_tipo = '"+nombreTipo+"', precio = '"+precio+"' WHERE id_tipo = "+id;
-								System.out.println(sql);
+					        	
+					        	if(medicina1Text.getText().equals(null) || medicina1Text.getText().equals("")) {
+						        	JOptionPane.showMessageDialog(null, "Medicina 1 no puede estar vacio");
+					        	}else {
+					        		String sql= "UPDATE consultas SET fecha = '"+fechaText.getText()+"', hora = '"+horaText.getText()+"', mascota = '"+mascotaText.getText()
+					        		+"', veterinario = '"+veterinarioText.getText()+"', medicina_1 = '"+medicina1Text.getText()+"', medicina_2 = '"+medicina2Text.getText()
+					        		+"', medicina_3 = '"+medicina3Text.getText()+"'  WHERE id_consulta = "+idConsulta.getText();
+					        		//System.out.println(sql);
 					        	
 								  st = conexion.createStatement();
 						            st.executeUpdate(sql);
 						            
-					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+						            JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+					        	}
+					        	
 
 					        }catch(Exception e1) {
 					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un Precio Valido o un ID valido ó que estos existan");
@@ -1051,7 +1315,6 @@ public class main extends javax.swing.JFrame  {
     	
         //select * from tipo where nombre_tipo = 'pupi'
        
-	    
         switch(presionado){
             case 1:
                 //Objeto del formulario dueños
@@ -1066,11 +1329,6 @@ public class main extends javax.swing.JFrame  {
             case 3:
                 medicinas_r medicina = new medicinas_r();
                 medicina.setVisible(true);
-                break;
-                
-            case 4:
-                Veterinarios veterinario = new Veterinarios();
-                veterinario.setVisible(true);
                 break;
         }
     }//GEN-LAST:event_insertarActionPerformed
@@ -1159,4 +1417,5 @@ public class main extends javax.swing.JFrame  {
     public javax.swing.JTable visor;
     // End of variables declaration//GEN-END:variables
 }
+
 
