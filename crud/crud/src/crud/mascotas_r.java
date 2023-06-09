@@ -3,6 +3,7 @@ package crud;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -19,7 +20,22 @@ public class mascotas_r extends javax.swing.JFrame {
 
     /**
      * Creates new form mascotas_r
+     * 
+     * 
      */
+	JTextField idMascotaBuscar = new JTextField();
+	JTextField newNombreMascota = new JTextField();
+	JTextField newNombreVeterinario = new JTextField();
+	JTextField newNombreDueno = new JTextField();
+	JTextField newNombreMedicina1 = new JTextField();
+	JTextField newNombreMedicina2 = new JTextField();
+	JTextField newNombreMedicina3 = new JTextField();
+
+
+
+
+
+
     public mascotas_r() {
         initComponents();
         conexion conecta=new conexion();
@@ -47,58 +63,105 @@ public class mascotas_r extends javax.swing.JFrame {
     	actualizarDatos.setFont(new Font("Arial",Font.BOLD,20));
     	ss.add(actualizarDatos);
 
+    	JLabel idMascota = new JLabel("Mascota a Modificar su ID: ");
+    	idMascota.setSize(300,30);
+    	idMascota.setLocation(10,50);
+    	ss.add(idMascota);
+    	
+    	
+    	idMascotaBuscar.setSize(150,30);
+    	idMascotaBuscar.setLocation(150,50);
+    	ss.add(idMascotaBuscar);
+    	
+    	JButton btnBuscar = new JButton("buscar");
+    	btnBuscar.setLocation(150,80);
+    	btnBuscar.setSize(100,30);
+    	btnBuscar.setVisible(true);
+    	ss.add(btnBuscar);
+    
+    	btnBuscar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			
+					ponerDatos(idMascotaBuscar.getText());
+				
+			}
+    		
+    	});
     	
     	JLabel nombreMascota = new JLabel("Nombre de Mascota: ");
     	nombreMascota.setSize(150,30);
-    	nombreMascota.setLocation(10,50);
+    	nombreMascota.setLocation(10,120);
     	ss.add(nombreMascota);
     	
     	
-    	JTextField newNombreMascota = new JTextField();
     	newNombreMascota.setSize(150,30);
-    	newNombreMascota.setLocation(120,50);
+    	newNombreMascota.setLocation(130,120);
     	ss.add(newNombreMascota);
     	
     	
     	
-    	JLabel nombreMedicina = new JLabel("ID de Medicina: ");
-    	nombreMedicina.setSize(150,30);
-    	nombreMedicina.setLocation(10,80);
-    	ss.add(nombreMedicina);
+    	JLabel nombreMedicina1 = new JLabel("Medicina 1 ");
+    	nombreMedicina1.setSize(150,30);
+    	nombreMedicina1.setLocation(10,160);
+    	ss.add(nombreMedicina1);
     	
     	
-    	JTextField newNombreMedicina = new JTextField();
-    	newNombreMedicina.setSize(150,30);
-    	newNombreMedicina.setLocation(120,80);
-    	ss.add(newNombreMedicina);
+    	newNombreMedicina1.setSize(150,30);
+    	newNombreMedicina1.setLocation(120,160);
+    	ss.add(newNombreMedicina1);
     	
-    	JLabel nombreVeterinario = new JLabel("ID de Veterinario: ");
+    	JLabel nombreMedicina2 = new JLabel("Medicina 2 ");
+    	nombreMedicina2.setSize(150,30);
+    	nombreMedicina2.setLocation(10,190);
+    	ss.add(nombreMedicina2);
+    	
+    	
+    	newNombreMedicina2.setSize(150,30);
+    	newNombreMedicina2.setLocation(120,190);
+    	ss.add(newNombreMedicina2);
+    	
+    	JLabel nombreMedicina3 = new JLabel("Medicina 3 ");
+    	nombreMedicina3.setSize(150,30);
+    	nombreMedicina3.setLocation(10,220);
+    	ss.add(nombreMedicina3);
+    	
+    	
+    	newNombreMedicina3.setSize(150,30);
+    	newNombreMedicina3.setLocation(120,220);
+    	ss.add(newNombreMedicina3);
+    	
+    	
+    	
+    	JLabel nombreVeterinario = new JLabel("Nombre del Veterinario ");
     	nombreVeterinario.setSize(150,30);
-    	nombreVeterinario.setLocation(10,120);
+    	nombreVeterinario.setLocation(10,250);
     	ss.add(nombreVeterinario);
     	
     	
-    	JTextField newNombreVeterinario = new JTextField();
     	newNombreVeterinario.setSize(150,30);
-    	newNombreVeterinario.setLocation(150,120);
+    	newNombreVeterinario.setLocation(150,250);
     	ss.add(newNombreVeterinario);
     	
+    	JLabel nombreDueno = new JLabel("Nombre del Dueño ");
+    	nombreDueno.setSize(150,30);
+    	nombreDueno.setLocation(10,290);
+    	ss.add(nombreDueno);
     	
-    	JLabel idMascota = new JLabel("Mascota a Modificar su ID: ");
-    	idMascota.setSize(300,30);
-    	idMascota.setLocation(10,150);
-    	ss.add(idMascota);
+    	
+    	newNombreDueno.setSize(150,30);
+    	newNombreDueno.setLocation(150,290);
+    	ss.add(newNombreDueno);
+
     	
     	
-    	JTextField idMascotaBuscar = new JTextField();
-    	idMascotaBuscar.setSize(150,30);
-    	idMascotaBuscar.setLocation(150,150);
-    	ss.add(idMascotaBuscar);
     	
     	
     	
     	JButton s = new JButton("Actualizar");
-    	s.setLocation(180,190);
+    	s.setLocation(180,320);
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
@@ -115,25 +178,28 @@ public class mascotas_r extends javax.swing.JFrame {
 					        conexion con = new conexion();
 					        Connection conexion = con.conectar();
 					             
-					        String nombreMedicina = newNombreMedicina.getText();
-					        String id= idMascotaBuscar.getText();
-					        String nombreMascota= newNombreMascota.getText();
 					       
-					        String nombreVeterinario =newNombreVeterinario.getText();
 					        
 					        try {
-					        	
-						       
+					       
+					        	if(newNombreMedicina1.getText().equals(null) || newNombreMedicina1.getText().equals("")) {
+						        	JOptionPane.showMessageDialog(null, "Medicina 1 no puede estar vacio");
 
-						        String sql= "UPDATE mascotas SET nombre = '"+nombreMascota+"', fk_medicina = "+
-										nombreMedicina+", fk_veterinario = "+nombreVeterinario+" WHERE id="+id;
-								System.out.println(sql);
-								
+					        	}else {
+					        		String sql= "UPDATE mascotas SET nombre = '"+newNombreMascota.getText()+"', medicina_1 = '"+
+					        				newNombreMedicina1.getText()+"', nombre_vet = '"+newNombreVeterinario.getText()+"', nombre_dueño = '"+newNombreDueno.getText()
+							        		+"', medicina_2 = '"+newNombreMedicina2.getText()+"', medicina_3 = '"+newNombreMedicina3.getText()+"' WHERE id="+idMascotaBuscar.getText();
+									System.out.println(sql);
+									
+						        	
+									 st = conexion.createStatement();
+							         st.executeUpdate(sql);
+							         
+						        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
+					        	}
+					        		
+					        		
 					        	
-								 st = conexion.createStatement();
-						         st.executeUpdate(sql);
-						         
-					        	JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente ");
 
 					        }catch(Exception e1) {
 					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de tipo entero (INT) donde se solicite ID ó que existan ");
@@ -144,6 +210,49 @@ public class mascotas_r extends javax.swing.JFrame {
 			}});
     }
 
+    
+    
+ public void ponerDatos(Object id) {
+    	
+    	
+    	Statement st = null;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+        
+		  try{
+			  
+
+         	 String sql= "SELECT id,nombre,nombre_vet,nombre_dueño,medicina_1,medicina_2,medicina_3 FROM mascotas WHERE id="+id;
+			//	System.out.println(sql);
+				
+	            st = conexion.createStatement();
+	            ResultSet rs = st.executeQuery(sql);
+	  
+	            while(rs.next()){
+		           
+	       
+	            
+	            	idMascotaBuscar.setText(rs.getString(1));
+	            	newNombreMascota.setText(rs.getString(2));
+	            	newNombreVeterinario.setText(rs.getString(3));
+	            	newNombreDueno.setText(rs.getString(4));
+	            	newNombreMedicina1.setText(rs.getString(5));
+	            	newNombreMedicina2.setText(rs.getString(6));
+	                newNombreMedicina3.setText(rs.getString(7));
+	                
+
+	           
+	 	  
+	            	
+	            }
+	        }catch(SQLException e)
+	        {
+	        	JOptionPane.showMessageDialog(null, "ID no Valido, por favor ingresa uno valido");
+
+	           // e.printStackTrace();
+	        }
+   
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,10 +272,8 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         list_dueño = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        comboboxx = new javax.swing.JComboBox<>();
-        comboboxx2 = new javax.swing.JComboBox<>();
+        telefono_vet = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         subir_vet = new javax.swing.JButton();
         nuevo_vet = new javax.swing.JButton();
         cerrar_vet = new javax.swing.JButton();
@@ -194,24 +301,25 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel2.setText("Registro Mascotas");
 
         
+       /* jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Veterinarios");
 
-        ///aqui esta un combo box dieguita la jotita///////////////////////////////
+        nombre_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel6.setText("Comboboxss");
-        comboboxx.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        
-        ///aqui esta un combo box dieguita la jotita/////////////////////////////
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Comboboxss2");
-        comboboxx2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setText("Telefono");
 
+        telefono_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        
+*/
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Dueño");
         
         list_dueño.setFont(new java.awt.Font("Arial", 0, 12));
         list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un dueño" }));
         
-       /////////////////////////////////////////////////////////////////////////////
+        telefono_vet.setVisible(false);
        
         
         subir_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -264,16 +372,14 @@ public class mascotas_r extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                        .addComponent(jLabel7))
+                            .addComponent(jLabel5))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(list_dueño, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel4))
-                            .addComponent(comboboxx)
-                .addComponent(comboboxx2))))
+                            .addComponent(telefono_vet))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
@@ -319,17 +425,8 @@ public class mascotas_r extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(comboboxx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                       
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                		.addComponent(jLabel7)
-                                .addComponent(comboboxx2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                )))
-                          
-
-                .addGap(19, 19, 19))
+                            .addComponent(telefono_vet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+               .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(list_veterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -444,7 +541,6 @@ public class mascotas_r extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     public javax.swing.JComboBox<String> list_med;
     public javax.swing.JComboBox<String> list_veterinario;
     private javax.swing.JLabel med;
@@ -452,7 +548,7 @@ public class mascotas_r extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> list_dueño;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
-    public javax.swing.JComboBox<String> comboboxx;
-    public javax.swing.JComboBox<String> comboboxx2;
+    public javax.swing.JTextField telefono_vet;
     // End of variables declaration//GEN-END:variables
 }
+
