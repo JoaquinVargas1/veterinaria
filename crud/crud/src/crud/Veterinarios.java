@@ -210,8 +210,15 @@ public class Veterinarios extends javax.swing.JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				subir_vet(e);
+				String tel = telefono_vet.getText();
+        		int cant = tel.length();
+        		if(cant<=10) {
+        	
+        			subir_VeterinarioActionPerformed(e);
+        		
+        		}else {
+        			JOptionPane.showMessageDialog(null, "Demasiados caracteres en numero el numero de telefono, revise el numero y vuelva a intertarlo", "ERROR", JOptionPane.WARNING_MESSAGE);
+        		}
 			}
         	
         	
@@ -352,7 +359,31 @@ public class Veterinarios extends javax.swing.JFrame {
     }
     
     
-    
+    private void subir_VeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+        // TODO add your handling code here:
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+        
+                
+                String sql = "insert into veterinario(nombre_vet,telefono) values "
+                        + "('"+nombre_vet.getText()+"','"+telefono_vet.getText()+"')";
+                System.out.println(sql);
+               // System.out.println("consulta hecha");
+        try{
+            st = conexion.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+            
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+        }
+       // JOptionPane.showMessageDialog(null, "Borrado de la base de datos");
+        main os = new main();
+        os.mostrar("dueños");
+    }
     
     public static void main(String args[]) {
         

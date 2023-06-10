@@ -39,10 +39,11 @@ public class mascotas_r extends javax.swing.JFrame {
     public mascotas_r() {
         initComponents();
         conexion conecta=new conexion();
-        conecta.llenaCombo("medicinas", "nombre_medicina", list_med);
+        conecta.llenaCombo("medicinas", "nombre_medicina", list_dueño);
         conecta.llenaCombo("veterinario", "nombre_vet", list_veterinario);
-        conecta.llenaCombo("dueño", "nombre_dueño", list_dueño);
-    
+        conecta.llenaCombo("dueño", "nombre_dueño", list_med);
+        conecta.llenaCombo("medicinas", "nombre_medicina", list_med2);
+        conecta.llenaCombo("medicinas", "nombre_medicina", list_med3);
     }
     
     public void actualizarDatos() {
@@ -272,8 +273,8 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         list_dueño = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        comboboxx = new javax.swing.JComboBox<>();
-        comboboxx2 = new javax.swing.JComboBox<>();
+        list_med2 = new javax.swing.JComboBox<>();
+        list_med3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         subir_vet = new javax.swing.JButton();
@@ -290,12 +291,12 @@ public class mascotas_r extends javax.swing.JFrame {
         nombre_m.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        med.setText("Medicina");
+        med.setText("Dueño");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Veterinario");
 
-        list_med.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una medicina" }));
+        list_med.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un dueño" }));
 
         list_veterinario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione veterinario" }));
 
@@ -306,19 +307,25 @@ public class mascotas_r extends javax.swing.JFrame {
 
         ///aqui esta un combo box dieguita la jotita///////////////////////////////
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel6.setText("Comboboxss");
-        comboboxx.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setText("Medicina 2(opcional)");
+        list_med2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         
         ///aqui esta un combo box dieguita la jotita/////////////////////////////
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Comboboxss2");
-        comboboxx2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("Medicina3(opcional)");
+        list_med3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel5.setText("Dueño");
+        jLabel5.setText("Medicina(Obligatoria)");
         
         list_dueño.setFont(new java.awt.Font("Arial", 0, 12));
-        list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un dueño" }));
+        list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        
+        list_med2.setFont(new java.awt.Font("Arial", 0, 12));
+        list_med2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
+        list_med3.setFont(new java.awt.Font("Arial", 0, 12));
+        list_med3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        
         
        /////////////////////////////////////////////////////////////////////////////
        
@@ -381,8 +388,8 @@ public class mascotas_r extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel4))
-                            .addComponent(comboboxx)
-                .addComponent(comboboxx2))))
+                            .addComponent(list_med2)
+                .addComponent(list_med3))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
@@ -428,13 +435,13 @@ public class mascotas_r extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(comboboxx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(list_med2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                        
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 		.addComponent(jLabel7)
-                                .addComponent(comboboxx2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(list_med3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 )))
                           
 
@@ -472,18 +479,26 @@ public class mascotas_r extends javax.swing.JFrame {
                 Object med = list_med.getSelectedItem();
                 Object vet =list_veterinario.getSelectedItem();
                 Object due =list_dueño.getSelectedItem();
-                String sql = "insert into mascotas(nombre,nombre_medicina,nombre_vet,nombre_dueño) values "
-                        + "('"+nombre_m.getText()+"','"+med+"','"+vet +"','"+due+"')";
+                Object med2=list_med2.getSelectedItem();
+                Object med3 =list_med3.getSelectedItem();
+                
+                String sql = "insert into mascotas(nombre,medicina_1,nombre_vet,nombre_dueño,medicina_2,medicina_3) values "
+                        + "('"+nombre_m.getText()+"','"+due+"','"+vet +"','"+med+"','"+med2+"','"+med3+"')";
                 System.out.println(sql);
         try{
-            st = conexion.createStatement();
+        	if(due.toString().equals(" ")) {
+                JOptionPane.showMessageDialog(null, "Medicina no puede estar vacio");
+
+        	}else{
+        	st = conexion.createStatement();
             st.executeUpdate(sql);
-            
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+        	}
         }catch(SQLException e)
         {
+        	 JOptionPane.showMessageDialog(null, "Falta informacion");
             JOptionPane.showMessageDialog(null, "Error " +e.toString());
         }
-        JOptionPane.showMessageDialog(null, "Registro exitoso");
         main os = new main();
         os.mostrar("mascotas_r");
     }
@@ -561,7 +576,7 @@ public class mascotas_r extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> list_dueño;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
-    public javax.swing.JComboBox<String> comboboxx;
-    public javax.swing.JComboBox<String> comboboxx2;
+    public javax.swing.JComboBox<String> list_med2;
+    public javax.swing.JComboBox<String> list_med3;
     // End of variables declaration//GEN-END:variables
 }
