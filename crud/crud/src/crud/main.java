@@ -755,26 +755,7 @@ public class main extends javax.swing.JFrame  {
         
     }
     
-    //Método para eliminar datos
-    public void eliminar(String tabla, String columna, String valor){
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
-                //select * from tipo where nombre_tipo = 'pupi'
-                String sql = "delete from " + tabla + " where " + columna + " = '" + valor + "'";
-                System.out.println(sql);
-        try{
-            st = conexion.createStatement();
-            st.executeUpdate(sql);
-            
-        }catch(SQLException e)
-        {
-            JOptionPane.showMessageDialog(null, "Error " +e.toString());
-        }
-        JOptionPane.showMessageDialog(null, "Borrado de la base de datos");
-       
-        mostrar(tabla);
-    }
+
     //Método para actualizar
     public void actualizarDato(String tabla, String columna, String valor){
         Statement st;
@@ -1343,27 +1324,161 @@ public class main extends javax.swing.JFrame  {
                
         }
     }//GEN-LAST:event_insertarActionPerformed
-
+    //Método para eliminar datos
+    public void eliminardueños(String tabla, int id){
+ 
+        try{   
+        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar al dueño?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
+            if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
+            	
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                String sql = "DELETE FROM dueño WHERE id_dueño='"+id+"'";
+                System.out.println(sql);
+        	st = conexion.createStatement();
+            st.executeUpdate(sql);  
+            DefaultTableModel modelo = (DefaultTableModel) visor.getModel();
+        	modelo.removeRow(visor.getSelectedRow());
+        	JOptionPane.showMessageDialog(null, "Dueño eliminado con exito");//Mensaje exitoso
+        	
+            }
+          
+            }catch (SQLException e) {
+            	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
+       }
+        mostrar(tabla);
+    }
+    
+    public void eliminarmascota(String tabla, int id){
+    	 
+        try{   
+        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar ela mascota?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
+            if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
+            	
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                String sql = "DELETE FROM mascotas WHERE id='"+id+"'";
+                System.out.println(sql);
+        	st = conexion.createStatement();
+            st.executeUpdate(sql);  
+            DefaultTableModel modelo = (DefaultTableModel) visor.getModel();
+        	modelo.removeRow(visor.getSelectedRow());
+        	JOptionPane.showMessageDialog(null, "mascota eliminada con exito");//Mensaje exitoso
+        	
+            }
+          
+            }catch (SQLException e) {
+            	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
+       }
+        mostrar(tabla);
+    }
+    
+    public void eliminarmedicamentos(String tabla, int id){
+   	 
+        try{   
+        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar el medicamento?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
+            if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
+            	
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                String sql = "DELETE FROM medicinas WHERE id_medicina='"+id+"'";
+                System.out.println(sql);
+        	st = conexion.createStatement();
+            st.executeUpdate(sql);  
+            DefaultTableModel modelo = (DefaultTableModel) visor.getModel();
+        	modelo.removeRow(visor.getSelectedRow());
+        	JOptionPane.showMessageDialog(null, "medicamento eliminado con exito");//Mensaje exitoso
+        	
+            }
+          
+            }catch (SQLException e) {
+            	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
+       }
+        mostrar(tabla);
+    }
+    
+    public void eliminarveterinarios(String tabla, int id){
+      	 
+        try{   
+        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar al veterinario?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
+            if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
+            	
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                String sql = "DELETE FROM veterinario WHERE id_v='"+id+"'";
+                System.out.println(sql);
+        	st = conexion.createStatement();
+            st.executeUpdate(sql);  
+            DefaultTableModel modelo = (DefaultTableModel) visor.getModel();
+        	modelo.removeRow(visor.getSelectedRow());
+        	JOptionPane.showMessageDialog(null, "veterinario eliminado con exito");//Mensaje exitoso
+        	
+            }
+          
+            }catch (SQLException e) {
+            	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
+       }
+        mostrar(tabla);
+    }
+    
+    public void eliminarconsulta(String tabla, int id){
+     	 
+        try{   
+        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar al veterinario?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
+            if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
+            	
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+                String sql = "DELETE FROM consultas WHERE id_consulta='"+id+"'";
+                System.out.println(sql);
+        	st = conexion.createStatement();
+            st.executeUpdate(sql);  
+            DefaultTableModel modelo = (DefaultTableModel) visor.getModel();
+        	modelo.removeRow(visor.getSelectedRow());
+        	JOptionPane.showMessageDialog(null, "veterinario eliminado con exito");//Mensaje exitoso
+        	
+            }
+          
+            }catch (SQLException e) {
+            	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
+       }
+        mostrar(tabla);
+    }
+    
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
-        String valor = JOptionPane.showInputDialog(null,"Ingrese el nombre a eliminar");
+    	int id=Integer.parseInt(visor.getValueAt(visor.getSelectedRow(),0).toString());
+    	
         switch(presionado){
             case 1:
-                eliminar("dueño","nombre_dueño",valor);
+                eliminardueños("dueño",id);
                 
                 break;
             case 2:
-                eliminar("mascotas","nombre",valor);
+            	eliminarmascota("mascota",id);
                 break;
             case 3:
-                //La tabla medicina contiene llaves foránes(No eliminable)
-                break;
+            	eliminarmedicamentos("medicinas",id);
+            	break;
             case 4:
-                //La tabla mascotas contiene llaves foránes(No eliminable)
-                break;
+            	eliminarveterinarios("veterinario",id);
+            	break;
             case 5:
-                eliminar("tipo","nombre_tipo",valor);
+            	eliminarconsulta("consulta",id);
+            	break;
         }
+  
+        
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void cerrar_mainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_mainActionPerformed
