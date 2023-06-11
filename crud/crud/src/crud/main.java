@@ -1335,6 +1335,11 @@ public class main extends javax.swing.JFrame  {
                 Veterinarios veterinario = new Veterinarios();
                 veterinario.setVisible(true);
                 break;
+                
+            case 5:
+                Consultas Consultas = new Consultas();
+                Consultas.setVisible(true);
+                break;
                
         }
     }//GEN-LAST:event_insertarActionPerformed
