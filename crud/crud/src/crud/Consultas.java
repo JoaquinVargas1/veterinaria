@@ -264,9 +264,9 @@ public class Consultas extends javax.swing.JFrame {
         list_veterinario = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        list_dueño = new javax.swing.JTextField();
+        list_dueño = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        list_med2 = new javax.swing.JTextField();
+        list_med2 = new javax.swing.JComboBox<>();
         list_med3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -287,13 +287,13 @@ public class Consultas extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Fecha: ");
         
-        list_dueño.setFont(new java.awt.Font("Arial", 0, 12));
+        list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         
         //Hora
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("Hora: ");
         
-        list_med2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        list_med2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         
         //Medicina
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -485,10 +485,10 @@ public class Consultas extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> list_veterinario;
     private javax.swing.JLabel med;
     public javax.swing.JComboBox<String> nombre_m;
-    public javax.swing.JTextField list_dueño;
+    public javax.swing.JComboBox<String> list_dueño;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
-    public javax.swing.JTextField list_med2;
+    public javax.swing.JComboBox<String> list_med2;
     public javax.swing.JComboBox<String> list_med3;
     // End of variables declaration//GEN-END:variables
 }
