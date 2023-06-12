@@ -209,6 +209,13 @@ public class mascotas_r extends javax.swing.JFrame {
 					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de tipo entero (INT) donde se solicite ID ó que existan ");
 
 					        }
+				
+				 try {
+					conexion.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+						e1.printStackTrace();
+				}
 					      
 				
 			}});
@@ -255,6 +262,13 @@ public class mascotas_r extends javax.swing.JFrame {
 
 	           // e.printStackTrace();
 	        }
+	 
+	  try {
+		conexion.close();
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
    
     }
     /**
