@@ -971,6 +971,13 @@ public class main extends javax.swing.JFrame  {
 
 	           // e.printStackTrace();
 	        }
+	    
+	     try {
+		conexion.close();
+	     } catch (SQLException e1) {
+		// TODO Auto-generated catch block
+	 		e1.printStackTrace();
+	     }
    
     }
     public void actualizarDatosTablaVeterinarios() {
@@ -1083,6 +1090,13 @@ public class main extends javax.swing.JFrame  {
 					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID valido o un Telefono Valido sin exceder limite de digitos ");
 					        	
 					        }
+				
+							 try {
+								conexion.close();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 					        
 					      
 			}});
@@ -1131,6 +1145,13 @@ public class main extends javax.swing.JFrame  {
 
 	           // e.printStackTrace();
 	        }
+	    
+	     try {
+		conexion.close();
+	    } catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	    }
    
     }
     
@@ -1287,6 +1308,13 @@ public class main extends javax.swing.JFrame  {
 					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un Precio Valido o un ID valido ó que estos existan");
 
 					        }
+				
+				 try {
+					conexion.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 					        
 							
 					       
@@ -1326,14 +1354,14 @@ public class main extends javax.swing.JFrame  {
     }//GEN-LAST:event_insertarActionPerformed
     //Método para eliminar datos
     public void eliminardueños(String tabla, int id){
- 
+ 	Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
         try{   
         	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar al dueño?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
             if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
             	
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
+        
                 //select * from tipo where nombre_tipo = 'pupi'
                 String sql = "DELETE FROM dueño WHERE id_dueño='"+id+"'";
                 System.out.println(sql);
@@ -1349,17 +1377,26 @@ public class main extends javax.swing.JFrame  {
             	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
        }
         mostrar(tabla);
+	    
+	     try {
+		conexion.close();
+	   } catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	  }
+	    
+	    
     }
     
     public void eliminarmascota(String tabla, int id){
-    	 
+    	  Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
         try{   
         	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar ela mascota?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
             if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
             	
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
+       
                 //select * from tipo where nombre_tipo = 'pupi'
                 String sql = "DELETE FROM mascotas WHERE id='"+id+"'";
                 System.out.println(sql);
@@ -1375,17 +1412,24 @@ public class main extends javax.swing.JFrame  {
             	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
        }
         mostrar(tabla);
+	    
+	     try {
+			conexion.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
     
     public void eliminarmedicamentos(String tabla, int id){
-   	 
+   	  Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
         try{   
         	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar el medicamento?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
             if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
             	
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
+       
                 //select * from tipo where nombre_tipo = 'pupi'
                 String sql = "DELETE FROM medicinas WHERE id_medicina='"+id+"'";
                 System.out.println(sql);
@@ -1401,17 +1445,24 @@ public class main extends javax.swing.JFrame  {
             	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
        }
         mostrar(tabla);
+	    
+	     try {
+			conexion.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
     
     public void eliminarveterinarios(String tabla, int id){
-      	 
+      	   Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
         try{   
         	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar al veterinario?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
             if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
             	
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
+      
                 //select * from tipo where nombre_tipo = 'pupi'
                 String sql = "DELETE FROM veterinario WHERE id_v='"+id+"'";
                 System.out.println(sql);
@@ -1427,17 +1478,24 @@ public class main extends javax.swing.JFrame  {
             	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
        }
         mostrar(tabla);
+	    
+	     try {
+			conexion.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
     
     public void eliminarconsulta(String tabla, int id){
-     	 
+     	  Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
         try{   
         	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar la consulta?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
             if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
             	
-        Statement st;
-        conexion con = new conexion();
-        Connection conexion = con.conectar();
+       
                 //select * from tipo where nombre_tipo = 'pupi'
                 String sql = "DELETE FROM consultas WHERE id_consulta='"+id+"'";
                 System.out.println(sql);
@@ -1453,6 +1511,13 @@ public class main extends javax.swing.JFrame  {
             	JOptionPane.showMessageDialog(null,"Hubo un error, intente nuevamente");//Mensaje si hay error.
        }
         mostrar(tabla);
+	    
+	     try {
+			conexion.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
     
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
