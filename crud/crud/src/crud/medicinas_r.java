@@ -150,6 +150,13 @@ public class medicinas_r extends javax.swing.JFrame {
 					        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID Valido donde se solicita y un Tipo valido (INT) ó que estos existan");
 
 							}
+				
+							 try {
+								conexion.close();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 					       
 			}});
     }
@@ -194,6 +201,13 @@ public class medicinas_r extends javax.swing.JFrame {
 
 	           //e.printStackTrace();
 	        }
+	    
+	     try {
+		conexion.close();
+	   } catch (SQLException e1) {
+			// TODO Auto-generated catch block
+		e1.printStackTrace();
+	   }
    
     }
     @SuppressWarnings("unchecked")
