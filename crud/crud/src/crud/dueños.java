@@ -152,6 +152,13 @@ public class dueños extends javax.swing.JFrame {
 						        }catch(Exception e1) {
 						        	JOptionPane.showMessageDialog(null, "Error Favor de ingresar un ID de mascota de tipo entero (INT) al igual que en ID ó que existan ");
 						        }
+				
+							 try {
+								conexion.close();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						
 						 
         
@@ -191,6 +198,13 @@ public class dueños extends javax.swing.JFrame {
 
 	          e.printStackTrace();
 	        }
+	    
+	     try {
+		conexion.close();
+	    } catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	   }
    
     }
     /**
