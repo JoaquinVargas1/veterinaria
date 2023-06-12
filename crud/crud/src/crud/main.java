@@ -1432,7 +1432,7 @@ public class main extends javax.swing.JFrame  {
     public void eliminarconsulta(String tabla, int id){
      	 
         try{   
-        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar al veterinario?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
+        	int opc = JOptionPane.showConfirmDialog(this, "Deseas eliminar la consulta?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);//Dialogo de confirmacion.
             if (opc == JOptionPane.YES_OPTION) {//Si la opcion es YES(SI) entonces...
             	
         Statement st;

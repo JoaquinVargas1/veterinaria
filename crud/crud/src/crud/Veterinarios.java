@@ -201,8 +201,8 @@ public class Veterinarios extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("Numero telefonico: ");
         telefono_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        
-        
+        telefono_vet.setText("");
+        nombre_vet.setText(" ");
         //boton de guardar
         nuevo_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nuevo_vet.setText("Guardar Vet");
@@ -211,15 +211,33 @@ public class Veterinarios extends javax.swing.JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String tel = telefono_vet.getText();
-        		int cant = tel.length();
-        		if(cant<=10) {
+				String nom= nombre_vet.getText();
+				int cant = tel.length();
         	
-        			subir_VeterinarioActionPerformed(e);
-        		
-        		}else {
-        			JOptionPane.showMessageDialog(null, "Demasiados caracteres en numero el numero de telefono, revise el numero y vuelva a intertarlo", "ERROR", JOptionPane.WARNING_MESSAGE);
-        		}
-			}
+        		if(nom.equals(" ")) {
+        			
+        			JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+
+        		}else if(tel.equals("")) {
+        			
+        			JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+
+        		}else  {
+            		
+        			
+            		if(cant<=10 ) {
+            	
+            			
+            			
+    						subir_VeterinarioActionPerformed(e);
+    					
+            		
+            		
+            		}else {
+            			JOptionPane.showMessageDialog(null, "Demasiados caracteres en numero el numero de telefono, revise el numero y vuelva a intertarlo", "ERROR", JOptionPane.WARNING_MESSAGE);
+            		}
+            		
+        		}}
         	
         	
         	

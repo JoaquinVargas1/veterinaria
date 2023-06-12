@@ -108,6 +108,8 @@ public class dueños extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 			
+					
+				
 					ponerDatos(idDuenoBuscar.getText());
 				
 			}
@@ -219,6 +221,7 @@ public class dueños extends javax.swing.JFrame {
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         nombre_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nombre_d.setText(" ");
         nombre_d.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre_dActionPerformed(evt);
@@ -230,6 +233,7 @@ public class dueños extends javax.swing.JFrame {
         
         
         telefono_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        telefono_d.setText("");
         telefono_d.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefono_dActionPerformed(evt);
@@ -243,6 +247,8 @@ public class dueños extends javax.swing.JFrame {
         label_na2.setText("Dirección");
 
         direccion_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        direccion_d.setText(" ");
+        
         direccion_d.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 direccion_dActionPerformed(evt);
@@ -261,14 +267,44 @@ public class dueños extends javax.swing.JFrame {
            
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
                String tel = telefono_d.getText();
-        		int cant = tel.length();
-        		if(cant<=10) {
+               String nomd=nombre_d.getText();
+               String direc=direccion_d.getText();
+               int cant = tel.length();
         	
-        		subir_dueñoActionPerformed(evt);
+               System.out.println(cant);
+               
+        		if(nomd.equals(" ")) {
+        			
+        			JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+
+        		}else if(tel.equals("")) {
+        			JOptionPane.showMessageDialog(null, "El Telefono no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+        			
+        		}else if(direc.equals(" ")) {
+        			JOptionPane.showMessageDialog(null, "La direccion  no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+        			
+        		}
+        		
+        		
+        		else  {
+        		
+        			
+        		if(cant<=10 ) {
+        	
+        			
+        			
+						subir_dueñoActionPerformed(evt);
+					
+        		
+        		
         		}else {
         			JOptionPane.showMessageDialog(null, "Demasiados caracteres en numero el numero de telefono, revise el numero y vuelva a intertarlo", "ERROR", JOptionPane.WARNING_MESSAGE);
         		}
+        		
         		}
+        	
+        	
+        	}
         });
 
         cerrar_d.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -417,6 +453,13 @@ public class dueños extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static void validarTel(String telefono) throws Exception {
+        if (!telefono.matches("^[0-9]+$")) {
+            throw new Exception("El numero  no es válido.");
+        }
+    }
+
 
 
     public javax.swing.JButton cerrar_d;

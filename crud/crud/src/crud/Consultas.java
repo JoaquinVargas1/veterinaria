@@ -34,10 +34,22 @@ public class Consultas extends javax.swing.JFrame {
 	JTextField newNombreMedicina1 = new JTextField();
 	JTextField newNombreMedicina2 = new JTextField();
 	JTextField newNombreMedicina3 = new JTextField();
+	JComboBox Dia = new JComboBox();
+    JComboBox Mes = new JComboBox();
+    JComboBox Año = new JComboBox();
+    JComboBox Hora = new JComboBox();
+    JComboBox Minutos = new JComboBox();
 
     public Consultas() {
         initComponents();
         conexion conecta=new conexion();
+        conecta.llenaCombo("mascotas", "nombre", Mascota);
+        conecta.llenaCombo("veterinario", "nombre_vet", Veterinario);
+        conecta.llenaCombo("medicinas", "nombre_medicina", Medicina);
+        conecta.llenaCombo("medicinas", "nombre_medicina", MedicinaOpcional);
+        conecta.llenaCombo("medicinas", "nombre_medicina", MedicinaOpcional2);
+        
+        
     }
     
     public void actualizarDatos() {
@@ -279,20 +291,39 @@ public class Consultas extends javax.swing.JFrame {
         //Fecha
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Fecha: ");
-        JComboBox Dia = new JComboBox();
-        JComboBox Mes = new JComboBox();
-        JComboBox Año = new JComboBox();
        
+       
+        for (int i = 1; i <= 31; i++) {
+            Dia.addItem(i);
+        }
+        for (int i = 1; i <= 12; i++) {
+            Mes.addItem(i);
+        }
+        for (int i = 2023; i <=2035 ; i++) {
+            Año.addItem(i);
+        }
+        
         //Hora
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("Hora: ");
-        JComboBox Hora = new JComboBox();
-        JComboBox Minutos = new JComboBox();
+       
+        
+        for (int i = 1; i <= 24; i++) {
+            Hora.addItem(i);
+        }
+        
+        for (int i = 0; i <= 60; i+=15) {
+            Minutos.addItem(i);
+        }
+        
+        
         
         //Medicina
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Medicina:");
         Medicina.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Medicina.setFont(new java.awt.Font("Arial", 0, 12));
+        Medicina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
         
         med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         med.setText("Medicina (Opcional):");
@@ -302,21 +333,47 @@ public class Consultas extends javax.swing.JFrame {
         MedicinaOpcional = new JComboBox();
         MedicinaOpcional2 = new JComboBox();
         
+        MedicinaOpcional.setFont(new java.awt.Font("Arial", 0, 12));
+        MedicinaOpcional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
+        MedicinaOpcional2.setFont(new java.awt.Font("Arial", 0, 12));
+        MedicinaOpcional2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
+        
         //Veterinario
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText("Veterinario:");
         Veterinario = new JComboBox();
+        Veterinario.setFont(new java.awt.Font("Arial", 0, 12));
+        Veterinario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
         
         //Mascota
         lblNewLabel_1 = new JLabel("Mascota:");
         Mascota = new JComboBox();
-
+        Mascota.setFont(new java.awt.Font("Arial", 0, 12));
+        Mascota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
        /////////////////////////////////////////////////////////////////////////////
        
         
         subir_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        subir_vet.setText("Buscar");
+        subir_vet.setText("Guardar");
      
+        subir_vet.addActionListener(new java.awt.event.ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				
+				subir_consulta(e);
+				
+				
+			}
+        	
+        	
+        	
+        });
+        
+        
+        
+        
         cerrar_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_vet.setText("Cerrar");
         cerrar_vet.addActionListener(new java.awt.event.ActionListener() {
@@ -440,6 +497,49 @@ public class Consultas extends javax.swing.JFrame {
         this.dispose();
     }
     
+    private void subir_consulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subir_dueñoActionPerformed
+        // TODO add your handling code here:
+        Statement st;
+        conexion con = new conexion();
+        Connection conexion = con.conectar();
+                //select * from tipo where nombre_tipo = 'pupi'
+   //             medicinas_r m= new medicinas_r();
+                Object med = Medicina.getSelectedItem();
+                Object med2 = MedicinaOpcional.getSelectedItem();
+                Object med3 = MedicinaOpcional2.getSelectedItem();
+                String hor	= Hora.getSelectedItem().toString();
+                String min = Minutos.getSelectedItem().toString();
+                String dia = Dia.getSelectedItem().toString();
+                String mes	= Mes.getSelectedItem().toString();
+                String año = Año.getSelectedItem().toString();
+                Object mas	= Mascota.getSelectedItem();
+                Object vet = Veterinario.getSelectedItem();
+                String fecha=año+"-"+mes+"-"+dia;
+                String horario= hor+":"+min+":00";
+                
+                String sql ="insert into consultas(fecha,hora,mascota,veterinario,medicina_1,medicina_2,medicina_3) values "
+                        + "('"+fecha+"','"+horario +"','"+mas+"','"+vet +"','"+med+"','"+med2+"','"+med3+"')";
+                System.out.println(sql);
+        try{
+        	
+             
+
+        	
+        	st = conexion.createStatement();
+        	
+        	
+        	
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+        	
+        }catch(SQLException e)
+        {
+        	// JOptionPane.showMessageDialog(null, "Falta informacion");
+            JOptionPane.showMessageDialog(null, "Error " +e.toString());
+        }
+        main os = new main();
+        os.mostrar("Consultas");
+    }
     
     
     
@@ -471,8 +571,7 @@ public class Consultas extends javax.swing.JFrame {
         });
         
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+        // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cerrar_vet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
