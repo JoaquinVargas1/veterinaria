@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.mysql.jdbc.Connection;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JComboBox;
 
 public class Consultas extends javax.swing.JFrame {
 
@@ -34,14 +38,11 @@ public class Consultas extends javax.swing.JFrame {
     public Consultas() {
         initComponents();
         conexion conecta=new conexion();
-        conecta.llenaCombo("veterinario", "nombre_vet", list_veterinario);
-        conecta.llenaCombo("dueño", "nombre_dueño", list_med);
-        conecta.llenaCombo("medicinas", "nombre_medicina", list_med3);
     }
     
     public void actualizarDatos() {
     	JFrame f= new JFrame();
-    	f.setLayout(null);
+    	f.getContentPane().setLayout(null);
     	f.setSize(500,600);
     	f.setLocation(0,0);
     	f.setVisible(true);
@@ -159,7 +160,7 @@ public class Consultas extends javax.swing.JFrame {
     	s.setSize(100,30);
     	s.setVisible(true);
     	ss.add(s);
-    	f.add(ss);
+    	f.getContentPane().add(ss);
     	
     	s.addActionListener(new ActionListener() {
 
@@ -257,73 +258,59 @@ public class Consultas extends javax.swing.JFrame {
     private void initComponents() {
 
     	jLabel1 = new javax.swing.JLabel();
-        nombre_m = new javax.swing.JComboBox<>();
+        Medicina = new javax.swing.JComboBox<>();
         med = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        list_med = new javax.swing.JComboBox<>();
-        list_veterinario = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        list_dueño = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        list_med2 = new javax.swing.JComboBox<>();
-        list_med3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         subir_vet = new javax.swing.JButton();
         nuevo_vet = new javax.swing.JButton();
         cerrar_vet = new javax.swing.JButton();
-
         
         
    //     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        
         //Titulo
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setFont(new Font("Arial", Font.BOLD, 16)); // NOI18N
         jLabel2.setText("Consultas");
         
         //Fecha
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Fecha: ");
-        
-        list_dueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        
+        JComboBox Dia = new JComboBox();
+        JComboBox Mes = new JComboBox();
+        JComboBox Año = new JComboBox();
+       
         //Hora
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("Hora: ");
-        
-        list_med2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        JComboBox Hora = new JComboBox();
+        JComboBox Minutos = new JComboBox();
         
         //Medicina
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Medicina: ");
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setText("Medicina:");
+        Medicina.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         
-        list_med3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        list_med3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        med.setText("Medicina (Opcional):");
+        JLabel lblNewLabel = new JLabel("Medicina (Opcional):");
+        lblNewLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        
+        MedicinaOpcional = new JComboBox();
+        MedicinaOpcional2 = new JComboBox();
         
         //Veterinario
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setText("Veterinario");
-        
-        nombre_m.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("Veterinario:");
+        Veterinario = new JComboBox();
         
         //Mascota
-        med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        med.setText("Mazcota");
-        
-        list_med.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un dueño" }));
-        
-        //Lo demas ignoralo
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel3.setText("Veterinario");
-        list_veterinario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione veterinario" }));
-        list_veterinario.setVisible(false);       
-        jLabel3.setVisible(false);
+        lblNewLabel_1 = new JLabel("Mascota:");
+        Mascota = new JComboBox();
 
-        
-        
-        
        /////////////////////////////////////////////////////////////////////////////
        
         
@@ -338,97 +325,110 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                       // .addComponent(nuevo_vet)
-                        //.addGap(43, 43, 43)
-                    		.addComponent(jLabel2)
-                        .addComponent(subir_vet))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(list_dueño, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel4))
-                            .addComponent(list_med2)
-                .addComponent(list_med3))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(med)
-                                    .addComponent(jLabel3))
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(list_med, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nombre_m)
-                                    .addComponent(list_veterinario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                )))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(cerrar_vet)))
-                .addContainerGap(50, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(52)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+        							.addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(jLabel7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        					.addGap(18)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addGroup(layout.createSequentialGroup()
+        								.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        									.addComponent(Dia, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(Hora, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+        								.addGap(6)
+        								.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        									.addGroup(layout.createSequentialGroup()
+        										.addGap(32)
+        										.addComponent(jLabel4))
+        									.addGroup(layout.createSequentialGroup()
+        										.addGap(4)
+        										.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        											.addComponent(Minutos, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        											.addGroup(layout.createSequentialGroup()
+        												.addComponent(Mes, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        												.addPreferredGap(ComponentPlacement.UNRELATED)
+        												.addComponent(Año, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))))))
+        							.addComponent(Veterinario, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        						.addComponent(Mascota, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(subir_vet, Alignment.TRAILING))
+        					.addGap(56)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel1)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(med)
+        								.addComponent(lblNewLabel))
+        							.addGap(18)
+        							.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        								.addComponent(MedicinaOpcional, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(MedicinaOpcional2, 0, 140, Short.MAX_VALUE)
+        								.addComponent(Medicina, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        						.addComponent(cerrar_vet)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(264)
+        					.addComponent(jLabel2)))
+        			.addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(nombre_m, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(list_dueño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(med)
-                            .addComponent(list_med, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(list_med2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                       
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                		.addComponent(jLabel7)
-                                .addComponent(list_med3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                )))
-                          
-
-                .addGap(19, 19, 19))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(list_veterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(subir_vet)
-                    //.addComponent(nuevo_vet)
-                    .addComponent(cerrar_vet))
-                .addContainerGap(38, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jLabel4)
+        				.addComponent(jLabel2))
+        			.addGap(29)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel5)
+        				.addComponent(Dia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(Mes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(Año, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel1)
+        				.addComponent(Medicina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(10)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        							.addComponent(Hora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(Minutos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(jLabel6)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(18)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(MedicinaOpcional, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(med))))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(13)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel7)
+        						.addComponent(Veterinario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(MedicinaOpcional2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblNewLabel_1)
+        						.addComponent(Mascota, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(18)
+        					.addComponent(lblNewLabel)))
+        			.addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(cerrar_vet)
+        				.addComponent(subir_vet))
+        			.addContainerGap())
         );
+        getContentPane().setLayout(layout);
 
         pack();
         
@@ -476,19 +476,17 @@ public class Consultas extends javax.swing.JFrame {
     public javax.swing.JButton cerrar_vet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    public javax.swing.JComboBox<String> list_med;
-    public javax.swing.JComboBox<String> list_veterinario;
     private javax.swing.JLabel med;
-    public javax.swing.JComboBox<String> nombre_m;
-    public javax.swing.JComboBox<String> list_dueño;
+    public javax.swing.JComboBox<String> Medicina;
     public javax.swing.JButton nuevo_vet;
     public javax.swing.JButton subir_vet;
-    public javax.swing.JComboBox<String> list_med2;
-    public javax.swing.JComboBox<String> list_med3;
-    // End of variables declaration//GEN-END:variables
+    private JComboBox Veterinario;
+    private JLabel lblNewLabel_1;
+    private JComboBox Mascota;
+    private JComboBox MedicinaOpcional2;
+    private JComboBox MedicinaOpcional;
 }
