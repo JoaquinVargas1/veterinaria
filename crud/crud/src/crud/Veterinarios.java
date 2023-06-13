@@ -220,7 +220,7 @@ public class Veterinarios extends javax.swing.JFrame {
 
         		}else if(tel.equals("")) {
         			
-        			JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+        			JOptionPane.showMessageDialog(null, "El telefono no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
 
         		}else  {
             		
@@ -228,8 +228,16 @@ public class Veterinarios extends javax.swing.JFrame {
             		if(cant<=10 ) {
             	
             			
-            			
-    						subir_VeterinarioActionPerformed(e);
+            			try {
+            				validarNombres(nom);
+							validarTel(tel);
+							subir_VeterinarioActionPerformed(e);
+						
+							
+						} catch (Exception ev) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(null, ev.toString(), "ERROR", JOptionPane.WARNING_MESSAGE);
+						}
     					
             		
             		
@@ -431,6 +439,18 @@ public class Veterinarios extends javax.swing.JFrame {
         });
     }
 
+    
+    public static void validarTel(String telefono) throws Exception {
+        if (!telefono.matches("^[0-9]+$")) {
+            throw new Exception("El numero de telefono no es valido .");
+        }
+    }
+    
+    public static void validarNombres(String nombres) throws Exception {
+        if (!nombres.matches("^[A-Za-z ]+$")) {
+            throw new Exception("Nombre invalido.");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cerrar_vet;
     private javax.swing.JLabel jLabel1;

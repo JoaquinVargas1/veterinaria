@@ -285,7 +285,7 @@ public class dueños extends javax.swing.JFrame {
                String direc=direccion_d.getText();
                int cant = tel.length();
         	
-               System.out.println(cant);
+            //   System.out.println(cant);
                
         		if(nomd.equals(" ")) {
         			
@@ -306,8 +306,15 @@ public class dueños extends javax.swing.JFrame {
         		if(cant<=10 ) {
         	
         			
+        				try {
+        					validarNombres(nomd);
+        					validarTel(tel);
+							subir_dueñoActionPerformed(evt);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(null, e.toString(), "ERROR", JOptionPane.WARNING_MESSAGE);
+						}
         			
-						subir_dueñoActionPerformed(evt);
 					
         		
         		
@@ -470,10 +477,15 @@ public class dueños extends javax.swing.JFrame {
     
     public static void validarTel(String telefono) throws Exception {
         if (!telefono.matches("^[0-9]+$")) {
-            throw new Exception("El numero  no es válido.");
+            throw new Exception("El numero de telefono  no es válido.");
         }
     }
 
+    public static void validarNombres(String nombres) throws Exception {
+        if (!nombres.matches("^[A-Za-z ]+$")) {
+            throw new Exception("Nombre invalido.");
+        }
+    }
 
 
     public javax.swing.JButton cerrar_d;

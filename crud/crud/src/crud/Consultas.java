@@ -320,7 +320,7 @@ public class Consultas extends javax.swing.JFrame {
         
         //Medicina
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setText("Medicina:");
+        jLabel1.setText("Medicina(obligatoria):");
         Medicina.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Medicina.setFont(new java.awt.Font("Arial", 0, 12));
         Medicina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " "}));
@@ -360,10 +360,23 @@ public class Consultas extends javax.swing.JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				String vet=Veterinario.getSelectedItem().toString();
+				String mas=Mascota.getSelectedItem().toString();
+				String med=Medicina.getSelectedItem().toString();
+				
+				if (vet.equals(" ")) {
+					
+					JOptionPane.showMessageDialog(null, "Veterinario no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}else if(med.equals(" ")) {
+					
+					JOptionPane.showMessageDialog(null, "Medicina no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+					
+				}else if(mas.equals(" ")) {
+					JOptionPane.showMessageDialog(null, "Mascota no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}else {
 				
 				subir_consulta(e);
-				
+				}
 				
 			}
         	

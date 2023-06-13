@@ -306,7 +306,7 @@ public class mascotas_r extends javax.swing.JFrame {
         jLabel1.setText("Nombre");
 
         nombre_m.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
+       nombre_m.setText(" ");
         med.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         med.setText("Dueño");
 
@@ -353,27 +353,47 @@ public class mascotas_r extends javax.swing.JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				subir_Mascota(e);
+				
+				String medicina =list_dueño.getSelectedItem().toString();
+				String nom=nombre_m.getText();
+				String due=list_med.getSelectedItem().toString();
+				String vete =list_veterinario.getSelectedItem().toString();
+				if (nom.equals(" ")) {
+					
+					JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}else if (medicina.equals(" ")) {
+					JOptionPane.showMessageDialog(null, "Medicina no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+					
+				}else if(due.equals("Seleccione un dueño")){
+					
+					JOptionPane.showMessageDialog(null, "El dueño no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}else if(vete.equals("Seleccione veterinario")) {
+					
+					JOptionPane.showMessageDialog(null, "El veterinario no puede estar vacio", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}
+				
+				else {
+					
+					try {
+						validarNombres(nom);
+						
+							subir_Mascota(e);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e1.toString(), "ERROR", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				}
 				
 				
-			}
+				
+				
+			
         	
        	
         });
 
-        /*nuevo_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nuevo_vet.setText("Guardar Vet");
-        nuevo_vet.addActionListener(new java.awt.event.ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				subir_vet(e);
-			}
-        	
-        	
-        	
-        });*/
+   
 
         cerrar_vet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cerrar_vet.setText("Cerrar");
@@ -560,6 +580,11 @@ public class mascotas_r extends javax.swing.JFrame {
         });
     }
 
+    public static void validarNombres(String nombres) throws Exception {
+        if (!nombres.matches("^[A-Za-z ]+$")) {
+            throw new Exception("Nombre invalido.");
+        }}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cerrar_vet;
     private javax.swing.JLabel jLabel1;
