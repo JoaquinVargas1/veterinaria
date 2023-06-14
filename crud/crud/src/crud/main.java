@@ -240,6 +240,7 @@ public class main extends javax.swing.JFrame  {
             }
         });
 
+        recibo.setVisible(false);
         list_tablas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tablas" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -675,8 +676,8 @@ public class main extends javax.swing.JFrame  {
                 System.out.println(sql);
         
         model.addColumn("ID");
-        model.addColumn("Nombre");
         model.addColumn("Tipo");
+        model.addColumn("Precio");
         
         visor.setModel(model);
         
@@ -730,8 +731,8 @@ public class main extends javax.swing.JFrame  {
                 System.out.println(sql);
         
         model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Precio($)");
+        model.addColumn("Fecha");
+        model.addColumn("Hora");
         
         visor.setModel(model);
         
@@ -1503,7 +1504,7 @@ public class main extends javax.swing.JFrame  {
             st.executeUpdate(sql);  
             DefaultTableModel modelo = (DefaultTableModel) visor.getModel();
         	modelo.removeRow(visor.getSelectedRow());
-        	JOptionPane.showMessageDialog(null, "veterinario eliminado con exito");//Mensaje exitoso
+        	JOptionPane.showMessageDialog(null, "Consulta eliminada con exito");//Mensaje exitoso
         	
             }
           
